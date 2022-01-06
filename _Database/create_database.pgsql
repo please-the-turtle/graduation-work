@@ -1,3 +1,7 @@
+CREATE EXTENSION citext;
+CREATE DOMAIN email AS citext
+    CHECK ( value ~ '^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$' );
+
 CREATE TABLE task_statuses(
     header varchar(25) PRIMARY KEY,
     description varchar(250)
@@ -5,6 +9,12 @@ CREATE TABLE task_statuses(
 
 CREATE TABLE task_priorities(
     header varchar(25) PRIMARY KEY,
+    description varchar(250)
+);
+
+CREATE TABLE projects(
+    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name varchar(25),
     description varchar(250)
 );
 
@@ -19,12 +29,6 @@ CREATE TABLE tasks(
     deadline timestamp 
 );
 
-CREATE TABLE projects(
-    id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name varchar(25),
-    description varchar(250)
-);
-
 CREATE TABLE user_roles(
     header varchar(25) PRIMARY KEY,
     description varchar(250)
@@ -32,6 +36,7 @@ CREATE TABLE user_roles(
 
 CREATE TABLE users(
     id int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    mail email NOT NULL UNIQUE ,
     login varchar(25) NOT NULL,
     password varchar(25) NOT NULL,
     position varchar(25),

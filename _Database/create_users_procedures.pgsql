@@ -62,6 +62,7 @@ CREATE OR REPLACE PROCEDURE get_user_by_id(_id int)
     LANGUAGE SQL
     AS $body$
         SELECT login,
+               mail,
                password,
                position,
                firstname,
@@ -71,4 +72,35 @@ CREATE OR REPLACE PROCEDURE get_user_by_id(_id int)
         FROM users
         WHERE id = _id
     $body$;
+
+CREATE OR REPLACE PROCEDURE get_user_by_login(_login varchar(25))
+    LANGUAGE SQL
+    AS $body$
+        SELECT login,
+               mail,
+               password,
+               position,
+               firstname,
+               lastname, 
+               date_of_birth,
+               about_me
+        FROM users
+        WHERE login = _login
+    $body$;
+
+CREATE OR REPLACE PROCEDURE get_user_by_mail(_mail email)
+    LANGUAGE SQL
+    AS $body$
+        SELECT login,
+               mail,
+               password,
+               position,
+               firstname,
+               lastname, 
+               date_of_birth,
+               about_me
+        FROM users
+        WHERE mail = _mail
+    $body$;
+
 
