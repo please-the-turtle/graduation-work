@@ -1,11 +1,11 @@
 CREATE OR REPLACE PROCEDURE create_user(
-    _login varchar(25),
-    _password varchar(25),
-    _position varchar(25),
-    _firstname varchar(25),
-    _lastname varchar(25), 
+    _login varchar(50),
+    _password varchar(50),
+    _position varchar(50),
+    _firstname varchar(50),
+    _lastname varchar(50), 
     _date_of_birth timestamp,
-    _about_me varchar(250)
+    _about_me varchar(500)
     )
     LANGUAGE SQL
     AS $body$
@@ -37,13 +37,13 @@ CREATE OR REPLACE PROCEDURE delete_user(_id int)
 
 CREATE OR REPLACE PROCEDURE update_user(
     _id int,
-    _login varchar(25),
-    _password varchar(25),
-    _position varchar(25),
-    _firstname varchar(25),
-    _lastname varchar(25), 
+    _login varchar(50),
+    _password varchar(50),
+    _position varchar(50),
+    _firstname varchar(50),
+    _lastname varchar(50), 
     _date_of_birth timestamp,
-    _about_me varchar(250)
+    _about_me varchar(500)
     )
     LANGUAGE SQL
     AS $body$
@@ -73,7 +73,7 @@ CREATE OR REPLACE PROCEDURE get_user_by_id(_id int)
         WHERE id = _id
     $body$;
 
-CREATE OR REPLACE PROCEDURE get_user_by_login(_login varchar(25))
+CREATE OR REPLACE PROCEDURE get_user_by_login(_login varchar(50))
     LANGUAGE SQL
     AS $body$
         SELECT login,
