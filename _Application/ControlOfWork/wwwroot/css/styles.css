@@ -1,0 +1,77 @@
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #F1FAEE;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+.container .card {
+    position: relative;
+    width: 300px;
+    height: 175px;
+    margin: 30px;
+    box-shadow: 4px 4px 3px rgba(0, 0, 0, .1);
+    border-radius: 15px;
+    background: rgba(140, 140, 140, 0.3);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    border-top: 1px solid rgba(255, 255, 255, .5);
+    border-left: 1px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(5px);
+}
+
+.container .card .content {
+    padding: 20px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.container .card h3 {
+    font-size: 1.8em;
+    color: #222;
+    z-index: 1;
+}
+
+.container .card .content p {
+    font-size: 1em;
+    color: #222;
+    font-weight: 300;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.container .card .buttons{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.container .card button {
+    border: none;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 8px 20px;
+    background: #fff;
+    color: #222;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .2);
+}
