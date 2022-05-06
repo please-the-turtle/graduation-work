@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.PostgreSQL", "DAL.Postg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlOfWork", "ControlOfWork\ControlOfWork.csproj", "{7A2AB70B-C34A-40A6-A12B-DF09B8C05746}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlOfWork", "ControlOfWork\ControlOfWork.csproj", "{3030500B-310D-4C4A-97A0-7AAFA0EF4433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A2AB70B-C34A-40A6-A12B-DF09B8C05746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A2AB70B-C34A-40A6-A12B-DF09B8C05746}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A2AB70B-C34A-40A6-A12B-DF09B8C05746}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A2AB70B-C34A-40A6-A12B-DF09B8C05746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3030500B-310D-4C4A-97A0-7AAFA0EF4433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3030500B-310D-4C4A-97A0-7AAFA0EF4433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3030500B-310D-4C4A-97A0-7AAFA0EF4433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3030500B-310D-4C4A-97A0-7AAFA0EF4433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
