@@ -1,8 +1,20 @@
+using BuisnessLogicLayer;
+using DataAccessLayer.PostgreSQL;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+IConfigurationRoot configuration = GetConfiguration();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -24,3 +36,13 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+
+static IConfigurationRoot GetConfiguration()
+{
+    var configurationBuilder = new ConfigurationBuilder();
+    configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
+    configurationBuilder.AddJsonFile("appsettings.json");
+    var configuration = configurationBuilder.Build();
+
+    return configuration;
+}

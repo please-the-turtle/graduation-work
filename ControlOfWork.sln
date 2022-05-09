@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.PostgreSQL", "DAL.PostgreSQL\DAL.PostgreSQL.csproj", "{AB140B45-85C8-4395-BF7C-1B8F7EFDD352}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.PostgreSQL", "DataAccessLayer.PostgreSQL\DataAccessLayer.PostgreSQL.csproj", "{AB140B45-85C8-4395-BF7C-1B8F7EFDD352}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuisnessLogicLayer", "BuisnessLogicLayer\BuisnessLogicLayer.csproj", "{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlOfWork", "ControlOfWork\ControlOfWork.csproj", "{3030500B-310D-4C4A-97A0-7AAFA0EF4433}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlOfWork", "ControlOfWork\ControlOfWork.csproj", "{3030500B-310D-4C4A-97A0-7AAFA0EF4433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
