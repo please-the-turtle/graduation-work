@@ -5,16 +5,14 @@
 
 <h1>Hello, world!</h1>
 
-<RadzenCard Text="User 1">
-    @foreach(var user in users!)
-    {
-        <p>@user.Login     @user.Email</p>
-    }
-</RadzenCard>
+@foreach (var user in users!)
+{
+    <p>@user.Login     @user.Email</p>
+}
 
-Welcome to your new app.
+<MudText Align="Align.Center">Welcome to your new app.</MudText>
 
-@code{
+@code {
     private IEnumerable<User>? users;
 
     protected override void OnInitialized()

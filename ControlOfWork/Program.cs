@@ -1,3 +1,4 @@
+using MudBlazor.Services;
 using BuisnessLogicLayer;
 using DataAccessLayer.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMudServices();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddTransient<UserService>();
