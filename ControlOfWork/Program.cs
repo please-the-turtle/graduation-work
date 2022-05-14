@@ -2,6 +2,9 @@ using MudBlazor.Services;
 using BuisnessLogicLayer;
 using DataAccessLayer.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Authorization;
+using ControlOfWork.Infrastructure;
+using DataAccessLayer.PostgreSQL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +13,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddMudServices();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddTransient<UserService>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-
 IConfigurationRoot configuration = GetConfiguration();
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<AuthenticationStateProvider, TokenAuthenticationStateProvider>();
+
+builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

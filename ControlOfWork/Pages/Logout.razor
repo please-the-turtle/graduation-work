@@ -1,0 +1,16 @@
+﻿@using ControlOfWork.Infrastructure
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using Task = System.Threading.Tasks.Task;
+
+@layout ClearLayout
+@page "/logout"
+@inject NavigationManager Navigation
+@inject ProtectedLocalStorage LocalStorage
+
+@code{
+    protected async override Task OnInitializedAsync()
+    {
+        await LocalStorage.DeleteAsync(nameof(SecurityToken));
+        Navigation.NavigateTo("/login");
+    }
+}

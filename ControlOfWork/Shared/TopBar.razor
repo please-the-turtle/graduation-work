@@ -1,0 +1,18 @@
+﻿@inject NavigationManager Navigation
+
+<MudAppBar>
+    <MudText Typo="Typo.h4">Logo</MudText>
+    <MudSpacer />
+    <MudButton>
+        <MudText Color="Color.Default" Class="mr-2">Hello, User!</MudText>
+        <MudAvatar Color="Color.Secondary">U</MudAvatar>
+    </MudButton>
+    <MudIconButton OnClick="OnLogoutClick" Icon="@Icons.Filled.Logout" aria-label="Log out" Color="Color.Default" />
+</MudAppBar>
+
+@code{
+    private void OnLogoutClick()
+    {
+        Navigation.NavigateTo("/logout");
+    }
+}

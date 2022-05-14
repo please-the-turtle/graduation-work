@@ -1,24 +1,62 @@
 ﻿@page "/"
+@using Task = System.Threading.Tasks.Task
 @inject UserService UserService
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Control of work</PageTitle>
 
-<h1>Hello, world!</h1>
-
-@foreach (var user in users!)
+@if (_users != null)
+foreach (var user in _users!)
 {
-    <p>@user.Login     @user.Email</p>
+    <MudText Align="Align.Center">@user.Login | @user.Email</MudText>
+    <MudDivider />
 }
 
-<MudText Align="Align.Center">Welcome to your new app.</MudText>
+<MudButton OnClick="UpdateUserListAsync" Disabled="_isUsersListLoading">@_updateButtonText</MudButton>
 
 @code {
-    private IEnumerable<User>? users;
+    [Inject] IDialogService DialogService { get; set; } = null!;
 
-    protected override void OnInitialized()
+    private List<User> _users = null!;
+    private bool _isUsersListLoading = false;
+    private string _updateButtonText = "Update";
+
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await base.OnInitializedAsync();
 
-        users = UserService.Take(10);
+        await UpdateUserListAsync();
+    }
+
+    private async Task UpdateUserListAsync()
+    {
+        await Task.Run(() => ChangeButtonState());
+
+        try
+        {
+            _users = UserService.Take(10).ToList<User>();
+        }
+        catch(InvalidOperationException)
+        {
+            string messageBoxTitle = "Something wrong...";
+            string messageBoxText = "Try to update page.";
+
+            await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
+        }
+
+        await Task.Run(() => ChangeButtonState());
+    }
+
+    private void ChangeButtonState()
+    {
+        _isUsersListLoading = !_isUsersListLoading;
+
+        if (_isUsersListLoading)
+        {
+            _updateButtonText = "Loading...";
+        }
+        else
+        {
+            _updateButtonText = _updateButtonText = "Update";
+        }
     }
 }

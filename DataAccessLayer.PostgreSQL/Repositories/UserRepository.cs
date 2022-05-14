@@ -1,6 +1,6 @@
 ﻿using BuisnessLogicLayer;
 
-namespace DataAccessLayer.PostgreSQL
+namespace DataAccessLayer.PostgreSQL.Repositories
 {
     public class UserRepository : IUserRepository, IDisposable
     {
@@ -11,15 +11,8 @@ namespace DataAccessLayer.PostgreSQL
             _context = context;
         }
 
-        public void Add(NewUser newUser)
+        public void Add(User user)
         {
-            User user = new User
-            {
-                Login = newUser.Login,
-                PasswordHash = newUser.PasswordHash,
-                Email = newUser.Email
-            };
-
             _context.Users.Add(user);
 
             _context.SaveChanges();
@@ -35,30 +28,39 @@ namespace DataAccessLayer.PostgreSQL
 
         public User GetById(int id)
         {
-            User user = _context.Users.Find(id)!;
+            return _context.Users.Find(id)!;
+        }
 
-            return user;
+        public User GetByLogin(string login)
+        {
+            return _context.Users.FirstOrDefault(u => u.Login == login)!;
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email)!;
         }
 
         public int GetId(User user)
         {
-            int id = _context.Users.FirstOrDefault(x => x.Id == user.Id)!.Id;
+            User userData = _context.Users.FirstOrDefault(x => x.Id == user.Id)!;
 
-            return id;
+            if (userData == null)
+            {
+                return -1;
+            }
+
+            return userData.Id;
         }
 
-        public IEnumerable<User> Take(int count)
+        public IQueryable<User> Take(int count)
         {
-            IEnumerable<User> users = _context.Users.Take(count);
-
-            return users;
+            return _context.Users.Take(count);
         }
 
-        public IEnumerable<User> Take(Range range)
+        public IQueryable<User> Take(Range range)
         {
-            IEnumerable<User> users = _context.Users.Take(range);
-
-            return users;
+            return _context.Users.Take(range);
         }
 
         public void Update(User user)

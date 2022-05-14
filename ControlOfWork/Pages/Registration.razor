@@ -1,0 +1,41 @@
+﻿@layout ClearLayout
+@page "/registration"
+@using System.ComponentModel.DataAnnotations
+@using ControlOfWork.Models
+@inherits RegisterAccountModel
+
+<EditForm Model="RegistrationData" OnValidSubmit="OnSignUpClick">
+    <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Style="height: 100vh">
+        <DataAnnotationsValidator />
+        <MudCard Width="30em" Elevation="15">
+            <MudCardHeader>
+                <MudText Typo="Typo.h4">Sign up</MudText>
+            </MudCardHeader>
+            @if (_isLoginTaken)
+            {
+                <MudAlert Severity="Severity.Error" Square="true" Visible="_isLoginTaken">This login is already taken.</MudAlert>
+            }
+            @if (_isEmailTaken)
+            {
+                <MudAlert Severity="Severity.Error" Square="true" Visible="_isEmailTaken">This email is already taken.</MudAlert>
+            }
+            <MudCardContent>
+                <MudTextField Label="Login" HelperText="Max. 25 characters"
+                              @bind-Value="RegistrationData.Login" For="@(() => RegistrationData.Login)" />
+                <MudTextField Label="Email" Class="mt-3"
+                              @bind-Value="RegistrationData.Email" For="@(() => RegistrationData.Email)" />
+                <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
+                              @bind-Value="RegistrationData.Password" For="@(() => RegistrationData.Password)" InputType="InputType.Password" />
+                <MudTextField Label="Password" HelperText="Repeat the password" Class="mt-3"
+                              @bind-Value="RegistrationData.PasswordRepeat" For="@(() => RegistrationData.PasswordRepeat)" InputType="InputType.Password" />
+            </MudCardContent>
+            <MudCardActions>
+                <MudText Align="Align.Start">Already have an account? <MudLink Href="/login">Login</MudLink></MudText>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"
+                           Class="ml-auto" Disabled="_isSignUpButtonDisabled">
+                    @_signUpButtonText
+                </MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudStack>
+</EditForm>

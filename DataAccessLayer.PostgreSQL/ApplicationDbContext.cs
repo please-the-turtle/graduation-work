@@ -5,10 +5,15 @@ namespace DataAccessLayer.PostgreSQL
 {
     public partial class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext()
+        {
+            Database.EnsureCreated();
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            
         }
 
         public virtual DbSet<Project> Projects { get; set; } = null!;

@@ -1,0 +1,19 @@
+﻿.bottom-bar {
+    display: none;
+    align-items: center;
+    padding: 2em;
+    width: auto;
+    margin: 7px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 6em;
+    border-radius: 15px;
+}
+
+@media (orientation: portrait) {
+    .bottom-bar {
+        display: inline-flex;
+    }
+}

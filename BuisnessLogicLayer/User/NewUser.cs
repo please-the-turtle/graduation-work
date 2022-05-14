@@ -2,15 +2,15 @@
 {
     public class NewUser
     {
-        public NewUser(string login, string email, string passwordHash)
+        public NewUser(string login, string email, string password)
         {
             Login = login;
             Email = email;  
-            PasswordHash = passwordHash;
+            Password = password;
         }
 
         public string Email { get; set; } = null!;
         public string Login { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
+        public string Password { get; set; } = null!;
     }
 }

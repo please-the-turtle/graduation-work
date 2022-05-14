@@ -1,0 +1,10 @@
+﻿@layout ClearLayout
+@inject NavigationManager Navigation
+@using Task = System.Threading.Tasks.Task
+
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("login");
+    }
+}

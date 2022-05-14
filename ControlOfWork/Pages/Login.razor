@@ -1,0 +1,37 @@
+﻿@layout ClearLayout
+@page "/login"
+@inherits LoginModel
+
+@using System.ComponentModel.DataAnnotations
+@using ControlOfWork.Models
+
+<EditForm Model="LoginData" OnValidSubmit="OnLoginClick">
+    <DataAnnotationsValidator />
+    <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Style="height: 100vh">
+        <MudCard Width="30em" Elevation="10">
+            <MudCardHeader>
+                <MudText Typo="Typo.h4">Sign in</MudText>
+
+            </MudCardHeader>
+            @if (!_authenticated)
+            {
+                <MudAlert Severity="Severity.Error" Square="true" Visible="_isAuthenticated">Incorrect login or password.</MudAlert>
+            }
+            <MudCardContent>
+                <MudTextField Label="Login" HelperText="Enter your login"
+                              @bind-Value="LoginData.Login" For="@(() => LoginData.Login)" />
+                <MudTextField Label="Password" HelperText="Enter the password" Class="mt-3"
+                              @bind-Value="LoginData.Password" For="@(() => LoginData.Password)" InputType="InputType.Password" />
+            </MudCardContent>
+            <MudCardActions>
+                <MudText Align="Align.Start">
+                    Don`t have account? <MudLink Href="/registration">Sign up</MudLink>
+                </MudText>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"
+                           Class="ml-auto" Disabled="_isLoginButtonDisabled">
+                    @_loginButtonText
+                </MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudStack>
+</EditForm>
