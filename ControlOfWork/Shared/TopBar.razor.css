@@ -1,1 +1,21 @@
-﻿
+﻿nav{
+    justify-content: center;
+    display: flex;
+}
+
+.nav-link ::deep a{
+    color: white;
+    font-size: 1.7em;
+    font-weight: lighter;
+    padding-inline: .3em;
+}
+
+.nav-link ::deep a.active {
+    font-weight: 500;
+}
+
+@media (max-width: 641px) {
+    nav {
+        display: none;
+    }
+}

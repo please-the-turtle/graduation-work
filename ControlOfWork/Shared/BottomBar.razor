@@ -1,3 +1,22 @@
-﻿<div class="bottom-bar mud-theme-primary justify-space-evenly">
-        
+﻿@inject NavigationManager Navigation
+
+<div class="bottom-bar justify-space-evenly">
+    <nav class="nav-link">
+        <NavLink href="projects">
+            <MudIcon Icon="@Icons.Filled.Work" Size="Size.Large" /> 
+            Projects
+        </NavLink>
+        <NavLink href="dashboard">
+            <MudIcon Icon="@Icons.Filled.SpaceDashboard" Size="Size.Large" /> 
+            Dashboard
+        </NavLink>
+        <NavLink href="tasks">
+            <MudIcon Icon="@Icons.Filled.Checklist" Size="Size.Large" /> 
+            Tasks
+        </NavLink>
+    </nav>
 </div>
+
+@code{
+    
+}

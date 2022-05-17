@@ -1,18 +1,44 @@
 ﻿@inject NavigationManager Navigation
+@inject AuthenticationStateProvider Authentication
 
-<MudAppBar>
+<MudAppBar Elevation="0">
     <MudText Typo="Typo.h4">Logo</MudText>
     <MudSpacer />
-    <MudButton>
-        <MudText Color="Color.Default" Class="mr-2">Hello, User!</MudText>
-        <MudAvatar Color="Color.Secondary">U</MudAvatar>
-    </MudButton>
+    <nav class="nav-link">
+        <NavLink href="projects" Match="NavLinkMatch.Prefix">Projects</NavLink>
+        <NavLink href="dashboard" Match="NavLinkMatch.Prefix">Dashboard</NavLink>
+        <NavLink href="tasks" Match="NavLinkMatch.Prefix">Tasks</NavLink>
+    </nav>
+    <MudSpacer />
+    <MudLink Href="#" Underline="Underline.None">
+        <MudAvatar Color="Color.Secondary">@GetFirstUserNameLetter()</MudAvatar>
+    </MudLink>
     <MudIconButton OnClick="OnLogoutClick" Icon="@Icons.Filled.Logout" aria-label="Log out" Color="Color.Default" />
 </MudAppBar>
 
-@code{
+@code {
+    private string _userName = "user";
+
+    protected async override System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        var state = await Authentication.GetAuthenticationStateAsync();
+        _userName = state?.User?.Identity?.Name ?? "user";
+    }
+
     private void OnLogoutClick()
     {
         Navigation.NavigateTo("/logout");
+    }
+
+    private char GetFirstUserNameLetter()
+    {
+        if (_userName == null)
+        {
+            return 'U';
+        }
+
+        char firstLetter = _userName[0];
+
+        return char.ToUpper(firstLetter);
     }
 }

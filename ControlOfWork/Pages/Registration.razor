@@ -7,7 +7,7 @@
 <EditForm Model="RegistrationData" OnValidSubmit="OnSignUpClick">
     <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Style="height: 100vh">
         <DataAnnotationsValidator />
-        <MudCard Width="30em" Elevation="15">
+        <MudCard Elevation="15">
             <MudCardHeader>
                 <MudText Typo="Typo.h4">Sign up</MudText>
             </MudCardHeader>
@@ -30,7 +30,9 @@
                               @bind-Value="RegistrationData.PasswordRepeat" For="@(() => RegistrationData.PasswordRepeat)" InputType="InputType.Password" />
             </MudCardContent>
             <MudCardActions>
-                <MudText Align="Align.Start">Already have an account? <MudLink Href="/login">Login</MudLink></MudText>
+                <MudText Align="Align.Start">
+                    <MudLink Href="/login">Login</MudLink>
+                </MudText>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"
                            Class="ml-auto" Disabled="_isSignUpButtonDisabled">
                     @_signUpButtonText

@@ -8,7 +8,7 @@
 <EditForm Model="LoginData" OnValidSubmit="OnLoginClick">
     <DataAnnotationsValidator />
     <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Style="height: 100vh">
-        <MudCard Width="30em" Elevation="10">
+        <MudCard Elevation="10">
             <MudCardHeader>
                 <MudText Typo="Typo.h4">Sign in</MudText>
 
@@ -25,7 +25,7 @@
             </MudCardContent>
             <MudCardActions>
                 <MudText Align="Align.Start">
-                    Don`t have account? <MudLink Href="/registration">Sign up</MudLink>
+                    <MudLink Href="/registration">Sign up</MudLink>
                 </MudText>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary"
                            Class="ml-auto" Disabled="_isLoginButtonDisabled">
