@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.PostgreSQL"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuisnessLogicLayer", "BuisnessLogicLayer\BuisnessLogicLayer.csproj", "{DB8D02EC-4ED5-4147-8A2E-80DED843B24E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlOfWork", "ControlOfWork\ControlOfWork.csproj", "{3030500B-310D-4C4A-97A0-7AAFA0EF4433}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationLayer.Blazor", "PresentationLayer.Blazor\PresentationLayer.Blazor.csproj", "{3030500B-310D-4C4A-97A0-7AAFA0EF4433}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

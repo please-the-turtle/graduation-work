@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ControlOfWork.Models
+namespace PresentationLayer.Blazor.Models
 {
     public class LoginViewModel
     {

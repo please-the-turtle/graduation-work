@@ -1,5 +1,5 @@
 using BuisnessLogicLayer.Users;
-using ControlOfWork.Infrastructure;
+using PresentationLayer.Blazor.Infrastructure;
 using DataAccessLayer.PostgreSQL;
 using DataAccessLayer.PostgreSQL.Repositories;
 using Microsoft.AspNetCore.Components.Authorization;

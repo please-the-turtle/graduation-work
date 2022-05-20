@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace ControlOfWork.Models
+namespace PresentationLayer.Blazor.Models
 {
     public class RegisterAccountModel : ComponentBase
     {

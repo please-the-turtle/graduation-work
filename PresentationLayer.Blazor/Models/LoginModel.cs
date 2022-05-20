@@ -1,10 +1,10 @@
 ﻿using BuisnessLogicLayer.Users;
-using ControlOfWork.Infrastructure;
+using PresentationLayer.Blazor.Infrastructure;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor;
 
-namespace ControlOfWork.Models
+namespace PresentationLayer.Blazor.Models
 {
     public class LoginModel : ComponentBase
     {

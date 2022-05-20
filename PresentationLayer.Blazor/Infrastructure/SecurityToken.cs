@@ -1,4 +1,4 @@
-﻿namespace ControlOfWork.Infrastructure
+﻿namespace PresentationLayer.Blazor.Infrastructure
 {
     public class SecurityToken
     {
