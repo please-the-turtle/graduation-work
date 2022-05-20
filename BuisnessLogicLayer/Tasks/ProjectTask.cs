@@ -1,10 +1,12 @@
-﻿namespace BuisnessLogicLayer
+﻿using BuisnessLogicLayer.Projects;
+
+namespace BuisnessLogicLayer.Tasks
 {
-    public partial class Task
+    public partial class ProjectTask
     {
-        public Task()
+        public ProjectTask()
         {
-            InverseParentNavigation = new HashSet<Task>();
+            InverseParentNavigation = new HashSet<ProjectTask>();
             UserAssignedToTasks = new HashSet<UserAssignedToTask>();
         }
 
@@ -17,11 +19,11 @@
         public TimeSpan LeadTime { get; set; }
         public DateTime? Deadline { get; set; }
 
-        public virtual Task? ParentNavigation { get; set; }
+        public virtual ProjectTask? ParentNavigation { get; set; }
         public virtual TaskPriority PriorityNavigation { get; set; } = null!;
         public virtual Project Project { get; set; } = null!;
         public virtual TaskStatus StatusNavigation { get; set; } = null!;
-        public virtual ICollection<Task> InverseParentNavigation { get; set; }
+        public virtual ICollection<ProjectTask> InverseParentNavigation { get; set; }
         public virtual ICollection<UserAssignedToTask> UserAssignedToTasks { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿.main-content {
-    margin: 7px;
     word-wrap: break-word;
-    border-radius: 15px;
+    max-width: 1200px;
 }
 
 @media(max-width: 641px) {

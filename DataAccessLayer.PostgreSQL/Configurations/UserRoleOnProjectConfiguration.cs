@@ -1,8 +1,9 @@
-﻿using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Projects;
+using BuisnessLogicLayer.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccessLayer.PostgreSQL
+namespace DataAccessLayer.PostgreSQL.Configurations
 {
     internal class UserRoleOnProjectConfiguration : IEntityTypeConfiguration<UserRoleOnProject>
     {

@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Users;
 using ControlOfWork.Infrastructure;
 using Microsoft.AspNetCore.Components;
-using Task = System.Threading.Tasks.Task;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor;
 
 namespace ControlOfWork.Models
 {
     public class LoginModel : ComponentBase
     {
-        [Inject] ProtectedLocalStorage LocalStorage { get; set; } = null!;
-        [Inject] NavigationManager NavigationManager { get; set; } = null!;
-        [Inject] UserService UserService { get; set; } = null!;
-        [Inject] IDialogService DialogService { get; set; } = null!;
+        [Inject] private ProtectedLocalStorage LocalStorage { get; set; } = null!;
+        [Inject] private NavigationManager NavigationManager { get; set; } = null!;
+        [Inject] private UserService UserService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
         public LoginViewModel LoginData { get; set; }
 
         private const string EnabledLoginDataText = "Log in";

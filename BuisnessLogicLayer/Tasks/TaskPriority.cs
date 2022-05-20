@@ -1,15 +1,15 @@
-﻿namespace BuisnessLogicLayer
+﻿namespace BuisnessLogicLayer.Tasks
 {
     public partial class TaskPriority
     {
         public TaskPriority()
         {
-            Tasks = new HashSet<Task>();
+            Tasks = new HashSet<ProjectTask>();
         }
 
         public TaskPriorityName Name { get; set; }
         public string? Description { get; set; }
 
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<ProjectTask> Tasks { get; set; }
     }
 }

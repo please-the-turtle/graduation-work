@@ -1,6 +1,6 @@
 ﻿using Cryptography = BCrypt.Net.BCrypt;
 
-namespace BuisnessLogicLayer
+namespace BuisnessLogicLayer.Users
 {
     public class UserService : IDisposable
     {
@@ -8,14 +8,14 @@ namespace BuisnessLogicLayer
 
         public UserService(IUserRepository repository)
         {
-            _repository = repository;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         public void RegisterNewUser(NewUser newUser)
         {
-            if (newUser == null) 
+            if (newUser == null)
             {
-                throw new ArgumentNullException("user"); 
+                throw new ArgumentNullException("user");
             }
 
             User user = new User
@@ -40,6 +40,11 @@ namespace BuisnessLogicLayer
 
         public IQueryable<User> Take(int count)
         {
+            if (count < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count), "Count must be greater than zero.");
+            }
+
             return _repository.Take(count);
         }
 
@@ -50,11 +55,21 @@ namespace BuisnessLogicLayer
 
         public int GetId(User user)
         {
+            if (user is null)
+            {
+                throw new ArgumentNullException(nameof(user), "User is null.");
+            }
+
             return _repository.GetId(user);
         }
 
         public bool IsUserExists(string login)
         {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                throw new ArgumentException($"'{nameof(login)}' cannot be null or whitespace.", nameof(login));
+            }
+
             User owner = _repository.GetByLogin(login);
 
             return owner != null;
@@ -62,6 +77,11 @@ namespace BuisnessLogicLayer
 
         public bool IsUserExists(string login, out User owner)
         {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                throw new ArgumentException($"'{nameof(login)}' cannot be null or whitespace.", nameof(login));
+            }
+
             owner = _repository.GetByLogin(login);
 
             return owner != null;
@@ -69,6 +89,11 @@ namespace BuisnessLogicLayer
 
         public bool IsEmailTaken(string email)
         {
+            if (email is null)
+            {
+                throw new ArgumentNullException(nameof(email), "Email is null.");
+            }
+
             User owner = _repository.GetByEmail(email);
 
             return owner != null;
@@ -76,6 +101,11 @@ namespace BuisnessLogicLayer
 
         public bool IsEmailTaken(string email, out User owner)
         {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentException($"'{nameof(email)}' cannot be null or whitespace.", nameof(email));
+            }
+
             owner = _repository.GetByEmail(email);
 
             return owner != null;
@@ -83,6 +113,16 @@ namespace BuisnessLogicLayer
 
         public bool Authenticate(string login, string password)
         {
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                throw new ArgumentException($"'{nameof(login)}' cannot be null or whitespace.", nameof(login));
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException($"'{nameof(password)}' cannot be null or whitespace.", nameof(password));
+            }
+
             User user;
 
             if (!IsUserExists(login, out user))

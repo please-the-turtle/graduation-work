@@ -8,14 +8,16 @@
 <EditForm Model="LoginData" OnValidSubmit="OnLoginClick">
     <DataAnnotationsValidator />
     <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Style="height: 100vh">
-        <MudCard Elevation="10">
+        <MudCard Elevation="10" Width="25em">
             <MudCardHeader>
                 <MudText Typo="Typo.h4">Sign in</MudText>
 
             </MudCardHeader>
             @if (!_authenticated)
             {
-                <MudAlert Severity="Severity.Error" Square="true" Visible="_isAuthenticated">Incorrect login or password.</MudAlert>
+                <MudAlert Severity="Severity.Error" Square="true" Visible="_isAuthenticated">
+                    Incorrect login or password.
+                </MudAlert>
             }
             <MudCardContent>
                 <MudTextField Label="Login" HelperText="Enter your login"

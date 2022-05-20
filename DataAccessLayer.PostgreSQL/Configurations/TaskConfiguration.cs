@@ -1,12 +1,12 @@
-﻿using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccessLayer.PostgreSQL
+namespace DataAccessLayer.PostgreSQL.Configurations
 {
-    internal class TaskConfiguration : IEntityTypeConfiguration<BuisnessLogicLayer.Task>
+    internal class TaskConfiguration : IEntityTypeConfiguration<ProjectTask>
     {
-        public void Configure(EntityTypeBuilder<BuisnessLogicLayer.Task> builder)
+        public void Configure(EntityTypeBuilder<ProjectTask> builder)
         {
             builder.ToTable("tasks");
 

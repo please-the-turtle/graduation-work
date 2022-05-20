@@ -1,4 +1,4 @@
-﻿namespace BuisnessLogicLayer
+﻿namespace BuisnessLogicLayer.Tasks
 {
     public enum TaskPriorityName
     {

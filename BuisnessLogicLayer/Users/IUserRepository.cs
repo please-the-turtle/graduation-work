@@ -1,4 +1,4 @@
-﻿namespace BuisnessLogicLayer
+﻿namespace BuisnessLogicLayer.Users
 {
     public interface IUserRepository : IDisposable
     {

@@ -1,4 +1,6 @@
-﻿namespace BuisnessLogicLayer
+﻿using BuisnessLogicLayer.Users;
+
+namespace BuisnessLogicLayer.Projects
 {
     public partial class UserRoleOnProject
     {

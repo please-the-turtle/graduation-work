@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Projects;
+using BuisnessLogicLayer.Tasks;
+using BuisnessLogicLayer.Users;
+using DataAccessLayer.PostgreSQL.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.PostgreSQL
 {
@@ -13,13 +16,13 @@ namespace DataAccessLayer.PostgreSQL
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            
+
         }
 
         public virtual DbSet<Project> Projects { get; set; } = null!;
-        public virtual DbSet<BuisnessLogicLayer.Task> Tasks { get; set; } = null!;
+        public virtual DbSet<ProjectTask> Tasks { get; set; } = null!;
         public virtual DbSet<TaskPriority> TaskPriorities { get; set; } = null!;
-        public virtual DbSet<BuisnessLogicLayer.TaskStatus> TaskStatuses { get; set; } = null!;
+        public virtual DbSet<BuisnessLogicLayer.Tasks.TaskStatus> TaskStatuses { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserAssignedToTask> UserAssignedToTasks { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;

@@ -1,10 +1,10 @@
-﻿using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using TaskStatus = BuisnessLogicLayer.TaskStatus;
+using TaskStatus = BuisnessLogicLayer.Tasks.TaskStatus;
 
-namespace DataAccessLayer.PostgreSQL
+namespace DataAccessLayer.PostgreSQL.Configurations
 {
     internal class TaskStatusConfiguration : IEntityTypeConfiguration<TaskStatus>
     {

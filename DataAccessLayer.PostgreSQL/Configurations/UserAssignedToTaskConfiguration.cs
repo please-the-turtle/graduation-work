@@ -1,8 +1,8 @@
-﻿using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DataAccessLayer.PostgreSQL
+namespace DataAccessLayer.PostgreSQL.Configurations
 {
     internal class UserAssignedToTaskConfiguration : IEntityTypeConfiguration<UserAssignedToTask>
     {

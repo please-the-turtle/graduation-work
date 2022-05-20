@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
-using System.Security.Claims;
+﻿using BuisnessLogicLayer.Users;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using BuisnessLogicLayer;
+using System.Security.Claims;
 
 namespace ControlOfWork.Infrastructure;
 

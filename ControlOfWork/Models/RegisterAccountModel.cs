@@ -1,15 +1,14 @@
-﻿using BuisnessLogicLayer;
+﻿using BuisnessLogicLayer.Users;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Task = System.Threading.Tasks.Task;
 
 namespace ControlOfWork.Models
 {
     public class RegisterAccountModel : ComponentBase
     {
-        [Inject] NavigationManager NavigationManager { get; set; } = null!;
-        [Inject] UserService UserService { get; set; } = null!;
-        [Inject] IDialogService DialogService { get; set; } = null!;
+        [Inject] private NavigationManager NavigationManager { get; set; } = null!;
+        [Inject] private UserService UserService { get; set; } = null!;
+        [Inject] private IDialogService DialogService { get; set; } = null!;
         public RegisterAccountViewModel RegistrationData { get; set; }
 
         private const string EnabledSignUpDataText = "Sign Up";
