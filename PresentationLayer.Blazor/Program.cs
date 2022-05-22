@@ -1,4 +1,5 @@
 using BuisnessLogicLayer.Users;
+using BuisnessLogicLayer.Projects;
 using PresentationLayer.Blazor.Infrastructure;
 using DataAccessLayer.PostgreSQL;
 using DataAccessLayer.PostgreSQL.Repositories;
@@ -21,6 +22,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, TokenAuthenticationState
 
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ProjectService>();
+builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 
 var app = builder.Build();
 

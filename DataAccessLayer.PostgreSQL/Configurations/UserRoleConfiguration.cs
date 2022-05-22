@@ -30,7 +30,7 @@ namespace DataAccessLayer.PostgreSQL.Configurations
         private void FillTable(EntityTypeBuilder<UserRole> builder)
         {
             builder.HasData(new UserRole { Name = UserRoleName.Creator, Description = "Creator of the project." });
-            builder.HasData(new UserRole { Name = UserRoleName.Moderator, Description = "Moderastor of the project." });
+            builder.HasData(new UserRole { Name = UserRoleName.Moderator, Description = "Moderator of the project." });
             builder.HasData(new UserRole { Name = UserRoleName.User, Description = "Ordinary user." });
         }
     }

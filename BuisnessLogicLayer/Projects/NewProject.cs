@@ -2,18 +2,28 @@
 {
     public class NewProject
     {
+        private string _name = null!;
+
         public NewProject(string name, string? description = null)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException($"'{nameof(name)}' cannot be null or whitespace.", nameof(name));
-            }
-
             Name = name;
             Description = description;
         }
 
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+        public string Name 
+        { 
+            get => _name;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"'{nameof(value)}' cannot be null or whitespace.", nameof(value));
+                }   
+                
+                _name = value;
+            } 
+        }
+
+        public string? Description { get; private set; }
     }
 }

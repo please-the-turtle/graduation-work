@@ -1,1 +1,53 @@
 ﻿@page "/projects"
+@using BuisnessLogicLayer.Projects
+@using BuisnessLogicLayer.Users
+@inject ProjectService ProjectService
+
+@foreach (var role in ProjectService.GetUserRoles().ToList())
+{
+    <MudText>@role.Name - @role.Description</MudText>
+}
+
+<MudText>@GetRole()</MudText>
+
+<MudButton OnClick="Create">Create</MudButton>
+<MudButton OnClick="Update">Update</MudButton>
+<MudButton OnClick="Delete">Delete</MudButton>
+
+@code{
+    void Create()
+    {
+        UserRoleOnProject userRole = new(6, 3, UserRoleName.Creator);
+
+        ProjectService.AssignUserOnProject(userRole);
+    }
+
+    void Update()
+    {
+        UserRoleOnProject userRole = ProjectService.GetUserRoleOnProject(6, 3);
+
+        if (ProjectService.GetUserRoleOnProject(6, 3).Role == UserRoleName.Creator)
+            userRole.Role = UserRoleName.User;
+        else
+            userRole.Role = UserRoleName.Creator;
+
+        ProjectService.ChangeUserRoleOnProject(userRole);
+    }
+
+    void Delete()
+    {
+        UserRoleOnProject userRole = ProjectService.GetUserRoleOnProject(6, 3);
+
+        ProjectService.RemoveUserFromProject(userRole);
+    }
+
+    string GetRole()
+    {
+        if (ProjectService.GetUserRoleOnProject(6, 3) == null)
+        {
+            return "error";
+        }
+
+        return ProjectService.GetUserRoleOnProject(6, 3).Role.ToString();
+    }
+}

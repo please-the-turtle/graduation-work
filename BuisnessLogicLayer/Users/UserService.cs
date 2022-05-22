@@ -18,6 +18,16 @@ namespace BuisnessLogicLayer.Users
                 throw new ArgumentNullException("user");
             }
 
+            if (IsUserExists(newUser.Login))
+            {
+                throw new InvalidOperationException("User with same login alredy exists.");
+            }
+
+            if (IsEmailTaken(newUser.Email))
+            {
+                throw new InvalidOperationException("Email already taken.");
+            }
+
             User user = new User
             {
                 Login = newUser.Login,

@@ -5,6 +5,10 @@ namespace BuisnessLogicLayer.Users
 {
     public partial class User
     {
+        private string _email = null!;
+        private string _login = null!;
+        private string _passwordHash = null!;
+
         public User()
         {
             UserAssignedToTasks = new HashSet<UserAssignedToTask>();
@@ -12,9 +16,48 @@ namespace BuisnessLogicLayer.Users
         }
 
         public int Id { get; set; }
-        public string Email { get; set; } = null!;
-        public string Login { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
+        public string Email 
+        { 
+            get => _email;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"'{nameof(value)}' cannot be null or whitespace.", nameof(value));
+                }
+
+                _email = value;
+            }
+        }
+
+        public string Login
+        {
+            get => _login;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"'{nameof(value)}' cannot be null or whitespace.", nameof(value));
+                }
+
+                _login = value;
+            }
+        }
+
+        public string PasswordHash
+        {
+            get => _passwordHash;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"'{nameof(value)}' cannot be null or whitespace.", nameof(value));
+                }
+
+                _passwordHash = value;
+            }
+        }
+
         public string? Position { get; set; }
         public string? Firstname { get; set; }
         public string? Lastname { get; set; }
