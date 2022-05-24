@@ -11,14 +11,33 @@ namespace BuisnessLogicLayer.Projects
             _repository = repository;
         }
 
-        public void Add(NewProject newProject)
+        public bool IsProjectExists(int projectId)
+        {
+            return _repository.IsProjectExists(projectId);
+        }
+
+        /// <summary>
+        /// Creates a new project and assigns a creator to it.
+        /// </summary>
+        /// <param name="newProject">Project to creating.</param>
+        /// <param name="creator">User who will assign to project as creator.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void Create(NewProject newProject, User creator)
         {
             if (newProject is null)
             {
                 throw new ArgumentNullException(nameof(newProject), "NewProject is null.");
             }
 
-            _repository.Add(newProject);
+            Project addedProject = _repository.Add(newProject);
+            UserRoleOnProject creatorRole = new(addedProject.Id, creator.Id, UserRoleName.Creator);
+
+            AssignUserOnProject(creatorRole);
+        }
+
+        public bool IsUserAssignedOnProject(int userId, int projectId)
+        {
+            return _repository.GetUserRoleOnProject(userId, projectId) != null;
         }
 
         public void AssignUserOnProject(UserRoleOnProject userRoleOnProject)
@@ -56,11 +75,6 @@ namespace BuisnessLogicLayer.Projects
             if (project is null)
             {
                 throw new ArgumentNullException(nameof(project), "Project is null.");
-            }
-
-            if (!_repository.IsProjectExists(project.Id))
-            {
-                throw new InvalidOperationException("Project not exists.");
             }
 
             _repository.Update(project);

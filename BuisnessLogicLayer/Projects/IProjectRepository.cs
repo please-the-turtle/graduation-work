@@ -4,7 +4,13 @@ namespace BuisnessLogicLayer.Projects
 {
     public interface IProjectRepository
     {
-        void Add(NewProject newProject);
+        /// <summary>
+        /// Added new project.
+        /// </summary>
+        /// <param name="newProject">Project to adding.</param>
+        /// <returns>Added project.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        Project Add(NewProject newProject);
 
         void Delete(int id);
 

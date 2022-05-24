@@ -12,7 +12,7 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(NewProject newProject)
+        public Project Add(NewProject newProject)
         {
             if (newProject is null)
             {
@@ -24,9 +24,11 @@ namespace DataAccessLayer.PostgreSQL.Repositories
                 Name = newProject.Name,
                 Description = newProject.Description
             };
-            _context.Projects.AddAsync(project);
+            Project addedProject = _context.Projects.Add(project).Entity;
 
             _context.SaveChanges();
+
+            return addedProject;
         }
 
         public void Update(Project project)
