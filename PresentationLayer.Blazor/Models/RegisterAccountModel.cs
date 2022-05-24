@@ -1,6 +1,7 @@
 ﻿using BuisnessLogicLayer.Users;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System.Text.RegularExpressions;
 
 namespace PresentationLayer.Blazor.Models
 {
@@ -29,6 +30,27 @@ namespace PresentationLayer.Blazor.Models
             await ChangeSignUpButtonStateAsync();
             await TryToRegisterNewUserAsync();
             await ChangeSignUpButtonStateAsync();
+        }
+
+        protected IEnumerable<string> PasswordStrength(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                yield return "Password is required!";
+                yield break;
+            }
+
+            if (password.Length < 8)
+                yield return "Password must be at least of length 8";
+            
+            if (!Regex.IsMatch(password, @"[A-Z]"))
+                yield return "Password must contain at least one capital letter";
+            
+            if (!Regex.IsMatch(password, @"[a-z]"))
+                yield return "Password must contain at least one lowercase letter";
+            
+            if (!Regex.IsMatch(password, @"[0-9]"))
+                yield return "Password must contain at least one digit";
         }
 
         private async Task TryToRegisterNewUserAsync()

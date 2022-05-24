@@ -14,6 +14,7 @@ namespace PresentationLayer.Blazor.Models
 
         [Required]
         [StringLength(30, ErrorMessage = "Password must be at least 8 characters long.", MinimumLength = 8)]
+        [RegularExpression(@"^((?=.*[a-z])(?=.*[A-Z])(?=.*\d)).+$", ErrorMessage= "Password must contain digits, uppercase and lowercase letters.")]
         public string? Password { get; set; }
 
         [Required]
