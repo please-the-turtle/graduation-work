@@ -2,6 +2,7 @@
 {
     public enum TaskPriorityName
     {
+        None,
         Low,
         Medium,
         High,

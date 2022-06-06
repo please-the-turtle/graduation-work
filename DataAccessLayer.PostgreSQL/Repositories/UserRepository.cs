@@ -73,7 +73,7 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             return userData.Id;
         }
 
-        public IQueryable<User> Take(int count)
+        public IEnumerable<User> Take(int count)
         {
             if (count < 1)
             {
@@ -83,7 +83,7 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             return _context.Users.Take(count);
         }
 
-        public IQueryable<User> Take(Range range)
+        public IEnumerable<User> Take(Range range)
         {
             return _context.Users.Take(range);
         }

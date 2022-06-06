@@ -1,0 +1,14 @@
+﻿.project-cards-container {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top-buttons {
+    display: flex;
+    flex-flow: row;
+    margin: 7px 7px 0 7px;
+    justify-content: center;
+    align-content: center;
+}

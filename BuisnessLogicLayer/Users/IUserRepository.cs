@@ -11,9 +11,9 @@
         /// </summary>
         /// <param name="count">Count of the returned users.</param>
         /// <returns>Specified number of users from the start.</returns>
-        IQueryable<User> Take(int count);
+        IEnumerable<User> Take(int count);
 
-        IQueryable<User> Take(Range range);
+        IEnumerable<User> Take(Range range);
 
         User GetByLogin(string login);
 

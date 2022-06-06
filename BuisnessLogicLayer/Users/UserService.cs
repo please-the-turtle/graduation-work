@@ -48,7 +48,12 @@ namespace BuisnessLogicLayer.Users
             return _repository.GetById(id);
         }
 
-        public IQueryable<User> Take(int count)
+        public User GetByLogin(string login)
+        {
+            return _repository.GetByLogin(login);
+        }
+
+        public IEnumerable<User> Take(int count)
         {
             if (count < 1)
             {
@@ -58,7 +63,7 @@ namespace BuisnessLogicLayer.Users
             return _repository.Take(count);
         }
 
-        public IQueryable<User> Take(Range range)
+        public IEnumerable<User> Take(Range range)
         {
             return _repository.Take(range);
         }

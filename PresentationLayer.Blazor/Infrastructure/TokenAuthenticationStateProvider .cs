@@ -38,6 +38,7 @@ public class TokenAuthenticationStateProvider : AuthenticationStateProvider
         {
             List<Claim> claims = new List<Claim>
             {
+                new Claim("Id", UserService.GetByLogin(token.Login).Id.ToString()),
                 new Claim(ClaimTypes.Name, token.Login)
             };
             ClaimsIdentity identity = new ClaimsIdentity(claims, AuthenticationType);

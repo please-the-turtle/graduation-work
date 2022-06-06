@@ -23,13 +23,13 @@ namespace BuisnessLogicLayer.Projects
         /// </summary>
         /// <param name="userId">Id of a specific user.</param>
         /// <returns>Projects of a specific user.</returns>
-        IQueryable<Project> GetUserProjects(int userId);
+        IEnumerable<Project> GetUserProjects(int userId);
 
         /// <summary>
         /// Gets all required project roles for users.
         /// </summary>
         /// <returns>All required project roles for users.</returns>
-        IQueryable<UserRole> GetAllUserRoles();
+        IEnumerable<UserRole> GetAllUserRoles();
 
         /// <summary>
         /// Get role of specific user on project.
@@ -44,7 +44,7 @@ namespace BuisnessLogicLayer.Projects
         /// </summary>
         /// <param name="projectId">Id of a specific project.</param>
         /// <returns>Users assingned to a specific project.</returns>
-        IQueryable<User> GetProjectUsers(int projectId);
+        IEnumerable<User> GetProjectUsers(int projectId);
 
         void AssignUserToProject(UserRoleOnProject userRoleOnProject);
 

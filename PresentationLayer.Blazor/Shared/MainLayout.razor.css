@@ -1,6 +1,7 @@
 ﻿.main-content {
-    word-wrap: break-word;
     max-width: 1000px;
+    height: 100%;
+    word-wrap: break-word;
     margin-left: auto;
     margin-right: auto;
 }

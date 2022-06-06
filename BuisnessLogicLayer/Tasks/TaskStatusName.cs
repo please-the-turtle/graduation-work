@@ -2,6 +2,7 @@
 {
     public enum TaskStatusName
     {
+        None,
         NotAtWork,
         InQueue,
         InProgress,

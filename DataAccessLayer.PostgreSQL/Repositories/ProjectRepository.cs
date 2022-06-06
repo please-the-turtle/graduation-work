@@ -87,7 +87,7 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             _context.SaveChanges();
         }
 
-        public IQueryable<User> GetProjectUsers(int projectId)
+        public IEnumerable<User> GetProjectUsers(int projectId)
         {
             if (projectId < 1)
             {
@@ -101,7 +101,7 @@ namespace DataAccessLayer.PostgreSQL.Repositories
                 .Contains(u.Id));
         }
 
-        public IQueryable<Project> GetUserProjects(int userId)
+        public IEnumerable<Project> GetUserProjects(int userId)
         {
             if (userId < 1)
             {
@@ -130,7 +130,7 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             return _context.UserRoleOnProjects.Find(userId, projectId)!;
         }
 
-        public IQueryable<UserRole> GetAllUserRoles()
+        public IEnumerable<UserRole> GetAllUserRoles()
         {
             return _context.UserRoles.AsQueryable();
         }

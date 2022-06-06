@@ -12,6 +12,7 @@
     border-radius: 15px;
     background-color: var(--mud-palette-appbar-background);
     box-shadow: var(--mud-elevation-10);
+    z-index: 1350;
 }
 
 nav {

@@ -90,7 +90,7 @@ namespace BuisnessLogicLayer.Projects
             _repository.Delete(id);
         }
 
-        public IQueryable<Project> GetUserProjects(int userId)
+        public IEnumerable<Project> GetUserProjects(int userId)
         {
             if (userId < 1)
             {
@@ -100,7 +100,7 @@ namespace BuisnessLogicLayer.Projects
             return _repository.GetUserProjects(userId);
         }
 
-        public IQueryable<User> GetProjectUsers(int projectId)
+        public IEnumerable<User> GetProjectUsers(int projectId)
         {
             if (projectId < 1)
             {
@@ -131,7 +131,7 @@ namespace BuisnessLogicLayer.Projects
             return _repository.GetUserRoleOnProject(userId, projectId);
         }
 
-        public IQueryable<UserRole> GetUserRoles()
+        public IEnumerable<UserRole> GetUserRoles()
         {
             return _repository.GetAllUserRoles();
         }

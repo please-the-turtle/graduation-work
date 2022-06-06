@@ -1,53 +1,77 @@
 ﻿@page "/projects"
+
 @using BuisnessLogicLayer.Projects
 @using BuisnessLogicLayer.Users
+
 @inject ProjectService ProjectService
+@inject AuthenticationStateProvider AuthenticationState
+@inject IDialogService DialogService
 
-@foreach (var role in ProjectService.GetUserRoles().ToList())
-{
-    <MudText>@role.Name - @role.Description</MudText>
-}
+<div class="top-buttons">
+    <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
+        <MudButton OnClick="RefreshProjectsListAsync">
+            Refresh
+        </MudButton>
+        <MudButton>
+            Create new
+        </MudButton>
+    </MudButtonGroup>
+</div>
 
-<MudText>@GetRole()</MudText>
-
-<MudButton OnClick="Create">Create</MudButton>
-<MudButton OnClick="Update">Update</MudButton>
-<MudButton OnClick="Delete">Delete</MudButton>
-
-@code{
-    void Create()
+<div class="project-cards-container">
+    @if (_currentUserId > 0 && _projects != null)
     {
-        UserRoleOnProject userRole = new(6, 3, UserRoleName.Creator);
-
-        ProjectService.AssignUserOnProject(userRole);
-    }
-
-    void Update()
-    {
-        UserRoleOnProject userRole = ProjectService.GetUserRoleOnProject(6, 3);
-
-        if (ProjectService.GetUserRoleOnProject(6, 3).Role == UserRoleName.Creator)
-            userRole.Role = UserRoleName.User;
-        else
-            userRole.Role = UserRoleName.Creator;
-
-        ProjectService.ChangeUserRoleOnProject(userRole);
-    }
-
-    void Delete()
-    {
-        UserRoleOnProject userRole = ProjectService.GetUserRoleOnProject(6, 3);
-
-        ProjectService.RemoveUserFromProject(userRole);
-    }
-
-    string GetRole()
-    {
-        if (ProjectService.GetUserRoleOnProject(6, 3) == null)
+        foreach (var project in _projects)
         {
-            return "error";
+            <ProjectCard Project="@project" OnProjectDeleted="RefreshProjectsListAsync" />
+        }
+    }
+</div>
+
+@code {
+    private int _currentUserId;
+    private IEnumerable<Project> _projects = null!;
+
+    protected async override Task OnInitializedAsync()
+    {
+        await RefreshProjectsListAsync();
+    }
+
+    private async Task RefreshProjectsListAsync()
+    {
+        string userIdString = null!;
+
+        try
+        {
+            AuthenticationState state = await AuthenticationState.GetAuthenticationStateAsync();
+            userIdString = state?.User?.FindFirst("Id")?.Value ?? string.Empty;
+        }
+        catch (InvalidOperationException)
+        {
+            await ShowErrorMessageAsync();
+            return;
         }
 
-        return ProjectService.GetUserRoleOnProject(6, 3).Role.ToString();
+        if (!int.TryParse(userIdString, out _currentUserId))
+        {
+            await ShowErrorMessageAsync();
+            return;
+        }
+
+        try
+        {
+            _projects = ProjectService.GetUserProjects(_currentUserId);
+        }
+        catch (InvalidOperationException)
+        {
+            await ShowErrorMessageAsync();
+        }
+    }
+
+    private async Task ShowErrorMessageAsync()
+    {
+        string messageBoxTitle = "Failed to refresh users list.";
+        string messageBoxText = "Try to update page.";
+        await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
     }
 }

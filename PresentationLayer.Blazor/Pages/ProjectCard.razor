@@ -1,0 +1,50 @@
+﻿@using BuisnessLogicLayer.Users
+
+@inherits ProjectCardModel
+
+<RoleOnProjectView UserRoleOnProject="_currentUserRole">
+    <div class="project-card-container">
+        <MudCard Elevation="5">
+            <MudCardHeader>
+                <MudText Typo="Typo.h5">@(Project?.Name ?? "Empty project")</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                @Project?.Description
+            </MudCardContent>
+            <MudCardActions>
+                <div class="project-card-actions">
+                    <div>
+                        <LimitedAccessView PrivilegedRoles="new[] {UserRoleName.Creator}">
+                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" OnClick="OnDeleteClickAsync">
+                                Delete
+                            </MudButton>
+                        </LimitedAccessView>
+                        <LimitedAccessView PrivilegedRoles="new[] {UserRoleName.Creator, UserRoleName.Moderator}">
+                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary">
+                                Update
+                            </MudButton>
+                        </LimitedAccessView>
+                    </div>
+                    <div>
+                        <MudAvatarGroup Max="3" MaxColor="Color.Primary" MaxSize="Size.Medium" Spacing="4">
+                            @if (_projectUsers != null)
+                            {
+                                foreach (var user in _projectUsers)
+                                {
+                                    <MudAvatar Color="Color.Primary" Size="Size.Medium" Image="@user.PictureUrl">
+                                        @GetFirstLetter(user.Login)
+                                    </MudAvatar>
+                                }
+                            }
+                        </MudAvatarGroup>
+                    </div>
+                    <div>
+                        <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary">
+                            Open
+                        </MudButton>
+                    </div>
+                </div>
+            </MudCardActions>
+        </MudCard>
+    </div>
+</RoleOnProjectView>
