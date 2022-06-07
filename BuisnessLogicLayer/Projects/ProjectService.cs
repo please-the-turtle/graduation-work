@@ -29,10 +29,15 @@ namespace BuisnessLogicLayer.Projects
                 throw new ArgumentNullException(nameof(newProject), "NewProject is null.");
             }
 
-            Project addedProject = _repository.Add(newProject);
-            UserRoleOnProject creatorRole = new(addedProject.Id, creator.Id, UserRoleName.Creator);
+            if (creator is null)
+            {
+                throw new ArgumentNullException(nameof(creator), "Creator user is null.");
+            }
 
-            AssignUserOnProject(creatorRole);
+            Project addedProject = _repository.Add(newProject);
+            UserRoleOnProject creatorRole = new(creator.Id, addedProject.Id, UserRoleName.Creator);
+
+            AssignUserToProject(creatorRole); 
         }
 
         public bool IsUserAssignedOnProject(int userId, int projectId)
@@ -40,7 +45,7 @@ namespace BuisnessLogicLayer.Projects
             return _repository.GetUserRoleOnProject(userId, projectId) != null;
         }
 
-        public void AssignUserOnProject(UserRoleOnProject userRoleOnProject)
+        public void AssignUserToProject(UserRoleOnProject userRoleOnProject)
         {
             if (userRoleOnProject is null)
             {

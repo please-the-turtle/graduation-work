@@ -4,7 +4,7 @@ namespace PresentationLayer.Blazor.Models
 {
     public class RegisterAccountViewModel
     {
-        [Required()]
+        [Required]
         [StringLength(25, ErrorMessage = "Name length can't be more than 25.")]
         public string? Login { get; set; }
 

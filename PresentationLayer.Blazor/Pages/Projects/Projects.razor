@@ -9,11 +9,11 @@
 
 <div class="top-buttons">
     <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
-        <MudButton OnClick="RefreshProjectsListAsync">
+        <MudButton OnClick="RefreshProjectsListAsync" StartIcon="@Icons.Filled.Refresh">
             Refresh
         </MudButton>
-        <MudButton>
-            Create new
+        <MudButton OnClick="AddProjectAsync" StartIcon="@Icons.Filled.Add">
+            Create
         </MudButton>
     </MudButtonGroup>
 </div>
@@ -65,6 +65,17 @@
         catch (InvalidOperationException)
         {
             await ShowErrorMessageAsync();
+        }
+    }
+
+    private async Task AddProjectAsync()
+    {
+        var dialog = DialogService.Show<ProjectAdding_Dialog>("Adding new project");
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            await RefreshProjectsListAsync();
         }
     }
 

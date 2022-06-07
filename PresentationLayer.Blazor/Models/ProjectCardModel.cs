@@ -1,9 +1,9 @@
 ﻿using BuisnessLogicLayer.Projects;
-using PresentationLayer.Blazor.Shared;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using BuisnessLogicLayer.Users;
+using PresentationLayer.Blazor.Pages.Projects;
 
 namespace PresentationLayer.Blazor.Models
 {
@@ -79,7 +79,7 @@ namespace PresentationLayer.Blazor.Models
             {
                 try
                 {
-                    ProjectService.RemoveUserFromProject(_currentUserRole);
+                    ProjectService.Delete(Project.Id);
                     await OnProjectDeleted.InvokeAsync();
                 }
                 catch (InvalidOperationException)

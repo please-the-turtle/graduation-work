@@ -1,7 +1,6 @@
 ﻿using BuisnessLogicLayer.Users;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Text.RegularExpressions;
 
 namespace PresentationLayer.Blazor.Models
 {
@@ -12,17 +11,17 @@ namespace PresentationLayer.Blazor.Models
         [Inject] private IDialogService DialogService { get; set; } = null!;
         public RegisterAccountViewModel RegistrationData { get; set; }
 
-        private const string EnabledSignUpDataText = "Sign Up";
+        private const string EnabledSignUpButtonText = "Sign Up";
         private const string DisabledSignUpButtonText = "Loading...";
 
         protected bool _isLoginTaken = false;
         protected bool _isEmailTaken = false;
         protected bool _isSignUpButtonDisabled = false;
-        protected string _signUpButtonText = EnabledSignUpDataText;
+        protected string _signUpButtonText = EnabledSignUpButtonText;
 
         public RegisterAccountModel()
         {
-            RegistrationData = new RegisterAccountViewModel();
+            RegistrationData = new();
         }
 
         protected async Task OnSignUpClick()
@@ -30,27 +29,6 @@ namespace PresentationLayer.Blazor.Models
             await ChangeSignUpButtonStateAsync();
             await TryToRegisterNewUserAsync();
             await ChangeSignUpButtonStateAsync();
-        }
-
-        protected IEnumerable<string> PasswordStrength(string password)
-        {
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                yield return "Password is required!";
-                yield break;
-            }
-
-            if (password.Length < 8)
-                yield return "Password must be at least of length 8";
-            
-            if (!Regex.IsMatch(password, @"[A-Z]"))
-                yield return "Password must contain at least one capital letter";
-            
-            if (!Regex.IsMatch(password, @"[a-z]"))
-                yield return "Password must contain at least one lowercase letter";
-            
-            if (!Regex.IsMatch(password, @"[0-9]"))
-                yield return "Password must contain at least one digit";
         }
 
         private async Task TryToRegisterNewUserAsync()
@@ -89,7 +67,7 @@ namespace PresentationLayer.Blazor.Models
             }
             else
             {
-                _signUpButtonText = EnabledSignUpDataText;
+                _signUpButtonText = EnabledSignUpButtonText;
             }
 
             StateHasChanged();
