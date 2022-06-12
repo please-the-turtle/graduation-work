@@ -1,9 +1,9 @@
 ﻿@using BuisnessLogicLayer.Projects
 @using BuisnessLogicLayer.Users
 
-@if (PrivilegedRoles != null && 
+@if (RolesWithAccess != null && 
     RoleOnProject != null &&
-    PrivilegedRoles.Contains<UserRoleName>(RoleOnProject.Role))
+    RolesWithAccess.Contains<UserRoleName>(RoleOnProject.Role))
 {
     @ChildContent
 }
@@ -12,12 +12,9 @@
     [CascadingParameter(Name = "RoleOnProject")]
     public UserRoleOnProject RoleOnProject { get; set; } = null!;
 
-    //[Parameter]
-    //public EventCallback<UserRoleOnProject> RoleOnProjectChanged { get; set; }
-
     [Parameter]
     [EditorRequired]
-    public UserRoleName[] PrivilegedRoles { get; set; } = null!;
+    public UserRoleName[] RolesWithAccess { get; set; } = null!;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;

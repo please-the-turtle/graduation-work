@@ -1,0 +1,11 @@
+﻿.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;}
+
+.actions-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}

@@ -15,6 +15,13 @@
     public string ContentText { get; set; } =
         "Do you really want to delete this project?";
 
+    protected override void OnInitialized()
+    {
+        MudDialog.Title = "Confirm deletion";
+        MudDialog.Options.MaxWidth = MaxWidth.False;
+        base.OnInitialized();
+    }
+
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     private void Cancel() => MudDialog.Cancel();
 }

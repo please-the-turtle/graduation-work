@@ -27,6 +27,12 @@ namespace PresentationLayer.Blazor.Models
             NewProjectData = new();
         }
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            MudDialog.Title = "New project";
+        }
+
         protected async Task OnCreateClickedAsync()
         {
             await ChangeCreateButtonStateAsync();

@@ -47,6 +47,16 @@ namespace BuisnessLogicLayer.Projects
 
         public UserRoleName Role { get; set; }
 
+        public static UserRoleOnProject Empty
+        {
+            get
+            {
+                UserRoleOnProject emptyRole = new();
+                emptyRole.Role = UserRoleName.User;
+                return emptyRole;
+            }
+        }
+
         public virtual Project Project { get; set; } = null!;
         public virtual UserRole RoleNavigation { get; set; } = null!;
         public virtual User User { get; set; } = null!;

@@ -2,7 +2,7 @@
 
 namespace BuisnessLogicLayer.Projects
 {
-    public class ProjectService
+    public class ProjectService : IDisposable
     {
         private readonly IProjectRepository _repository;
 
@@ -101,8 +101,8 @@ namespace BuisnessLogicLayer.Projects
             {
                 throw new ArgumentOutOfRangeException(nameof(userId), "User id must be greater than zero.");
             }
-
-            return _repository.GetUserProjects(userId);
+            var p = _repository.GetUserProjects(userId);
+            return p;
         }
 
         public IEnumerable<User> GetProjectUsers(int projectId)
@@ -139,6 +139,11 @@ namespace BuisnessLogicLayer.Projects
         public IEnumerable<UserRole> GetUserRoles()
         {
             return _repository.GetAllUserRoles();
+        }
+
+        public void Dispose()
+        {
+            _repository.Dispose();
         }
     }
 }

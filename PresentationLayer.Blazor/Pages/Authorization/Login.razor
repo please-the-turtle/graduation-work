@@ -5,13 +5,12 @@
 @using System.ComponentModel.DataAnnotations
 @using PresentationLayer.Blazor.Models
 
-<EditForm Model="LoginData" OnValidSubmit="OnLoginClick">
+<EditForm Model="LoginData" OnValidSubmit="OnLoginClickAsync">
     <DataAnnotationsValidator />
     <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center" Style="height: 100vh">
         <MudCard Elevation="10" Width="25em">
             <MudCardHeader>
                 <MudText Typo="Typo.h4">Sign in</MudText>
-
             </MudCardHeader>
             @if (!_authenticated)
             {

@@ -2,7 +2,7 @@
 
 namespace BuisnessLogicLayer.Projects
 {
-    public interface IProjectRepository
+    public interface IProjectRepository : IDisposable
     {
         /// <summary>
         /// Added new project.

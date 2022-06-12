@@ -2,10 +2,9 @@
 
 @using BuisnessLogicLayer.Projects
 @using BuisnessLogicLayer.Users
+@using PresentationLayer.Blazor.Models
 
-@inject ProjectService ProjectService
-@inject AuthenticationStateProvider AuthenticationState
-@inject IDialogService DialogService
+@inherits ProjectsModel
 
 <div class="top-buttons">
     <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
@@ -19,70 +18,13 @@
 </div>
 
 <div class="project-cards-container">
-    @if (_currentUserId > 0 && _projects != null)
+    @if (CurrentUserId > 0 && Projects != null)
     {
-        foreach (var project in _projects)
+        foreach (var project in Projects)
         {
-            <ProjectCard Project="@project" OnProjectDeleted="RefreshProjectsListAsync" />
+            <ProjectCard Project="project"
+                 OnProjectDeleted="RefreshProjectsListAsync"
+                 OnProjectUpdated="RefreshProjectsListAsync"/>
         }
     }
 </div>
-
-@code {
-    private int _currentUserId;
-    private IEnumerable<Project> _projects = null!;
-
-    protected async override Task OnInitializedAsync()
-    {
-        await RefreshProjectsListAsync();
-    }
-
-    private async Task RefreshProjectsListAsync()
-    {
-        string userIdString = null!;
-
-        try
-        {
-            AuthenticationState state = await AuthenticationState.GetAuthenticationStateAsync();
-            userIdString = state?.User?.FindFirst("Id")?.Value ?? string.Empty;
-        }
-        catch (InvalidOperationException)
-        {
-            await ShowErrorMessageAsync();
-            return;
-        }
-
-        if (!int.TryParse(userIdString, out _currentUserId))
-        {
-            await ShowErrorMessageAsync();
-            return;
-        }
-
-        try
-        {
-            _projects = ProjectService.GetUserProjects(_currentUserId);
-        }
-        catch (InvalidOperationException)
-        {
-            await ShowErrorMessageAsync();
-        }
-    }
-
-    private async Task AddProjectAsync()
-    {
-        var dialog = DialogService.Show<ProjectAdding_Dialog>("Adding new project");
-        var result = await dialog.Result;
-
-        if (!result.Cancelled)
-        {
-            await RefreshProjectsListAsync();
-        }
-    }
-
-    private async Task ShowErrorMessageAsync()
-    {
-        string messageBoxTitle = "Failed to refresh users list.";
-        string messageBoxText = "Try to update page.";
-        await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
-    }
-}

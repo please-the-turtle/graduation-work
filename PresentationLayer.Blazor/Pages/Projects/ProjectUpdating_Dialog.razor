@@ -1,14 +1,14 @@
-﻿@inherits ProjectAddingModel
+﻿@inherits ProjectUpdatingModel
 
-<EditForm Model="NewProjectData" OnValidSubmit="OnCreateClickedAsync">
+<EditForm Model="ProjectData" OnValidSubmit="OnUpdateClickedAsync">
     <MudDialog>
         <DialogContent>
             <DataAnnotationsValidator />
             <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center">
                 <MudTextField Label="Name" HelperText="Max. 100 characters"
-                              @bind-Value="NewProjectData.Name" For="@(() => NewProjectData.Name)" />
+                              @bind-Value="ProjectData.Name" For="@(() => ProjectData.Name)" />
                 <MudTextField Label="Description" HelperText="Max. 500 characters" Lines="5"
-                              @bind-Value="NewProjectData.Description" For="@(() => NewProjectData.Description)" />
+                              @bind-Value="ProjectData.Description" For="@(() => ProjectData.Description)" />
             </MudStack>
         </DialogContent>
         <DialogActions>
@@ -16,8 +16,8 @@
                 Cancel
             </MudButton>
             <MudButton Color="Color.Primary" Variant="Variant.Filled"
-                       ButtonType="ButtonType.Submit" Disabled="IsCreateButtonDisabled">
-                @CreateButtonText
+                       ButtonType="ButtonType.Submit" Disabled="IsUpdateButtonDisabled">
+                @UpdateButtonText
             </MudButton>
         </DialogActions>
     </MudDialog>

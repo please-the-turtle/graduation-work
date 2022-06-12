@@ -19,39 +19,44 @@ namespace PresentationLayer.Blazor.Models
         protected IDialogService DialogService { get; set; } = null!;
 
         [Parameter]
-        [EditorRequired]
+        //[EditorRequired]
         public Project Project { get; set; } = null!;
 
         [Parameter]
         public EventCallback OnProjectDeleted { get; set; }
 
-        protected int _userId;
-        // TODO field name
-        protected UserRoleOnProject _currentUserRole = null!;
-        protected IEnumerable<User> _projectUsers = null!;
+        [Parameter]
+        public EventCallback OnProjectUpdated { get; set; }
+
+        protected UserRoleName[] RolesCapableDelete { get; set; }
+            = new[] { UserRoleName.Creator };
+        protected UserRoleName[] RolesCapableUpdate { get; set; }
+            = new[] { UserRoleName.Creator, UserRoleName.Moderator };
+
+        protected int UserId;
+        protected UserRoleOnProject CurrentUserRole = null!;
+        protected IEnumerable<User> ProjectUsers = null!;
 
         protected override async Task OnInitializedAsync()
         {
             AuthenticationState state = await AuthenticationState.GetAuthenticationStateAsync();
             string userIdString = state?.User?.FindFirst("Id")?.Value ?? string.Empty;
 
-            int.TryParse(userIdString, out _userId);
-            _currentUserRole = TryGetUserRoleOnProject();
-            _projectUsers = TryGetProjectUsers();
+            int.TryParse(userIdString, out UserId);
+            CurrentUserRole = TryGetUserRoleOnProject();
+            ProjectUsers = TryGetProjectUsers();
         }
 
         private UserRoleOnProject TryGetUserRoleOnProject()
         {
             try
             {
-                return ProjectService.GetUserRoleOnProject(_userId, Project.Id);
+                return ProjectService.GetUserRoleOnProject(UserId, Project.Id);
             }
             catch (InvalidOperationException)
             {
-                //  TODO
+                return null!;
             }
-
-            return null!;
         }
 
         private IEnumerable<User> TryGetProjectUsers()
@@ -62,17 +67,13 @@ namespace PresentationLayer.Blazor.Models
             }
             catch (InvalidOperationException)
             {
-                // sorry
+                return null!;
             }
-
-            return null!;
         }
 
         protected async void OnDeleteClickAsync()
         {
-            var options = new DialogOptions() { MaxWidth = MaxWidth.False };
-
-            var dialog = DialogService.Show<ProjectDeletingConfirmation_Dialog>("Confirm deletion", options);
+            var dialog = DialogService.Show<ProjectDeletingConfirmation_Dialog>();
             var result = await dialog.Result;
 
             if (!result.Cancelled)
@@ -89,6 +90,26 @@ namespace PresentationLayer.Blazor.Models
                     await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
                 }
             }
+        }
+
+        protected async Task OnUpdateClickAsync()
+        {
+            var parameters = new DialogParameters();
+            parameters.Add("Project", Project);
+            var dialog = DialogService.Show<ProjectUpdating_Dialog>(Project.Name, parameters);
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                await OnProjectUpdated.InvokeAsync();
+            }
+        }
+
+        protected void OnUsersClick()
+        {
+            var parameters = new DialogParameters();
+            parameters.Add(nameof(UsersOnProjectModel.Project), Project);
+            DialogService.Show<UsersOnProject_Dialog>("Project participants", parameters);
         }
 
         protected char GetFirstLetter(string str)

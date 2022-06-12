@@ -1,0 +1,26 @@
+﻿@using BuisnessLogicLayer.Projects
+@using BuisnessLogicLayer.Users
+
+@inherits UserOnProjectModel
+
+<div class="container">
+    <MudText Style="width: 15em" Align="Align.Left">@Item.UserLogin</MudText>
+    <div class="actions-container">
+        <MudSelect @bind-Value="SelectedRole" Disabled="!IsCapableUpdate"
+                   Variant="Variant.Outlined" Dense="true" Style="width: 8em" Margin="Margin.Dense">
+            <MudSelectItem Value="UserRoleName.User">
+                <MudText Typo="Typo.body2">User</MudText>
+            </MudSelectItem>
+            <MudSelectItem Value="UserRoleName.Moderator">
+                <MudText Typo="Typo.body2">Moderator</MudText>
+            </MudSelectItem>
+        </MudSelect>
+        <LimitedAccessView RolesWithAccess="RolesCapableDelete">
+            <MudIconButton Color="Color.Error" Icon="@Icons.Filled.PersonRemove"
+                           Size="Size.Medium" Disabled="!IsCapableDelete" 
+                           OnClick="RemoveUserFromProject" />
+        </LimitedAccessView>
+    </div>
+</div>
+
+

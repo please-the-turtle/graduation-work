@@ -1,5 +1,6 @@
 ﻿@using BuisnessLogicLayer.Projects
 @using BuisnessLogicLayer.Users
+
 @inject AuthenticationStateProvider StateProvider
 
 <CascadingValue Value="UserRoleOnProject" Name="RoleOnProject">
@@ -16,9 +17,4 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-    }
 }

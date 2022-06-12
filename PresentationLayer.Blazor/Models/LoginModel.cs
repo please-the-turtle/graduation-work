@@ -26,7 +26,7 @@ namespace PresentationLayer.Blazor.Models
             LoginData = new LoginViewModel();
         }
 
-        protected async Task OnLoginClick()
+        protected async Task OnLoginClickAsync()
         {
             await ChangeLoginButtonStateAsync();
             await TryToAuthenticateAsync();

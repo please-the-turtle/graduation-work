@@ -3,7 +3,7 @@ using BuisnessLogicLayer.Users;
 
 namespace DataAccessLayer.PostgreSQL.Repositories
 {
-    public class ProjectRepository : IProjectRepository, IDisposable
+    public class ProjectRepository : IProjectRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -107,12 +107,13 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             {
                 throw new ArgumentOutOfRangeException(nameof(userId), "Project id must be greater than zero.");
             }
-
-            return _context.Projects.Where(
+            
+            var p = _context.Projects.Where(
                 u => _context.UserRoleOnProjects
                 .Where(x => x.UserId == userId)
                 .Select(t => t.ProjectId)
                 .Contains(u.Id));
+            return p;
         }
 
         public UserRoleOnProject GetUserRoleOnProject(int userId, int projectId)

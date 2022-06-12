@@ -1,0 +1,23 @@
+﻿@using BuisnessLogicLayer.Users
+
+@inherits AssigningUserOnProjectModel
+
+<EditForm Model="AssignUserInfo" OnValidSubmit="TryAssignUserToProjectAsync">
+    <DataAnnotationsValidator />
+    <div class="assign-user-panel">
+        <MudTextField Label="Login" @bind-Value="AssignUserInfo.UserLogin" For="@(() => AssignUserInfo.UserLogin)" />
+        <div class="assign-user-panel-parameters-block">
+            <MudSelect @bind-Value="SelectedUserRole"
+                       Margin="Margin.Dense" Variant="Variant.Outlined" Dense="true" Style="width: 8em">
+                <MudSelectItem Value="UserRoleName.User">
+                    <MudText Typo="Typo.body2">User</MudText>
+                </MudSelectItem>
+                <MudSelectItem Value="UserRoleName.Moderator">
+                    <MudText Typo="Typo.body2">Moderator</MudText>
+                </MudSelectItem>
+            </MudSelect>
+            <MudIconButton Icon="@Icons.Filled.PersonAddAlt1" ButtonType="ButtonType.Submit"
+                           Color="Color.Success" Disabled="IsAssignButtonDisabled" />
+        </div>
+    </div>
+</EditForm>

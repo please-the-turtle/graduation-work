@@ -1,0 +1,29 @@
+﻿@using BuisnessLogicLayer.Users;
+
+@inherits UsersOnProjectModel
+
+<RoleOnProjectView UserRoleOnProject="RoleOnProject">
+    <MudDialog>
+        <DialogContent>
+            <MudContainer Style="max-height: 50vh;
+                                 max-width: 80vw; 
+                                 overflow-x: scroll; 
+                                 overflow-y: scroll">
+                <LimitedAccessView RolesWithAccess="RolesCapableAssign">
+                    <AssigningUserOnProject Project="Project" OnUserAssigned="UpdateUsersInfoAsync" />
+                    <MudDivider />
+                </LimitedAccessView>
+                @if (UsersInfo != null)
+                    foreach (var user in UsersInfo)
+                    {
+                        <UserOnProject Item="user" OnUserRemovedFromProject="UpdateUsersInfoAsync" />
+                    }
+            </MudContainer>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Close">
+                Close
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</RoleOnProjectView>

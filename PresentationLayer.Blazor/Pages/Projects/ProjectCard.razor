@@ -2,7 +2,7 @@
 
 @inherits ProjectCardModel
 
-<RoleOnProjectView UserRoleOnProject="_currentUserRole">
+<RoleOnProjectView UserRoleOnProject="CurrentUserRole">
     <div class="project-card-container">
         <MudCard Elevation="5">
             <MudCardHeader>
@@ -14,29 +14,33 @@
             <MudCardActions>
                 <div class="project-card-actions">
                     <div>
-                        <LimitedAccessView PrivilegedRoles="new[] {UserRoleName.Creator}">
-                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" OnClick="OnDeleteClickAsync">
+                        <LimitedAccessView RolesWithAccess="RolesCapableDelete">
+                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Error"
+                                       OnClick="OnDeleteClickAsync">
                                 Delete
                             </MudButton>
                         </LimitedAccessView>
-                        <LimitedAccessView PrivilegedRoles="new[] {UserRoleName.Creator, UserRoleName.Moderator}">
-                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary">
+                        <LimitedAccessView RolesWithAccess="RolesCapableUpdate">
+                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary"
+                                       OnClick="OnUpdateClickAsync">
                                 Update
                             </MudButton>
                         </LimitedAccessView>
                     </div>
                     <div>
-                        <MudAvatarGroup Max="3" MaxColor="Color.Primary" MaxSize="Size.Medium" Spacing="4">
-                            @if (_projectUsers != null)
-                            {
-                                foreach (var user in _projectUsers)
+                        <MudButton OnClick="OnUsersClick">
+                            <MudAvatarGroup Max="3" MaxColor="Color.Primary" MaxSize="Size.Medium" Spacing="4">
+                                @if (ProjectUsers != null)
                                 {
-                                    <MudAvatar Color="Color.Primary" Size="Size.Medium" Image="@user.PictureUrl">
-                                        @GetFirstLetter(user.Login)
-                                    </MudAvatar>
+                                    foreach (var user in ProjectUsers)
+                                    {
+                                        <MudAvatar Color="Color.Primary" Size="Size.Medium" Image="@user.PictureUrl">
+                                            @GetFirstLetter(user.Login)
+                                        </MudAvatar>
+                                    }
                                 }
-                            }
-                        </MudAvatarGroup>
+                            </MudAvatarGroup>
+                        </MudButton>
                     </div>
                     <div>
                         <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary">
