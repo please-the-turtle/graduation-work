@@ -4,17 +4,34 @@ namespace DataAccessLayer.PostgreSQL.Repositories
 {
     internal class TaskRepository : ITaskRepository
     {
-        public void ChangeTaskStatus(int taskId, BuisnessLogicLayer.Tasks.TaskStatus status)
+        private readonly ApplicationDbContext _context;
+
+        public TaskRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Create(NewTask newTask)
+        public void Add(NewTask newTask)
         {
             throw new NotImplementedException();
         }
 
         public void Delete(Task task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Get(Task task)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignUserToTask(int userId, int taskId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveUserFromTask(int userId, int taskId)
         {
             throw new NotImplementedException();
         }
@@ -35,16 +52,6 @@ namespace DataAccessLayer.PostgreSQL.Repositories
         }
 
         public IQueryable<Task> GetUserTasks(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsTaskExists(Task task)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsTaskHasChildren(Task task)
         {
             throw new NotImplementedException();
         }

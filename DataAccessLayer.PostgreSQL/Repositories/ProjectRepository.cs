@@ -1,5 +1,6 @@
 ﻿using BuisnessLogicLayer.Projects;
 using BuisnessLogicLayer.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.PostgreSQL.Repositories
 {
@@ -94,6 +95,8 @@ namespace DataAccessLayer.PostgreSQL.Repositories
                 throw new ArgumentOutOfRangeException(nameof(projectId), "Project id must be greater than zero.");
             }
 
+            _context.ChangeTracker.Clear();
+
             return _context.Users.Where(
                 u => _context.UserRoleOnProjects
                 .Where(x => x.ProjectId == projectId)
@@ -107,13 +110,16 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             {
                 throw new ArgumentOutOfRangeException(nameof(userId), "Project id must be greater than zero.");
             }
-            
-            var p = _context.Projects.Where(
+
+            _context.ChangeTracker.Clear();
+
+            var projects = _context.Projects.Where(
                 u => _context.UserRoleOnProjects
                 .Where(x => x.UserId == userId)
                 .Select(t => t.ProjectId)
                 .Contains(u.Id));
-            return p;
+
+            return projects;
         }
 
         public UserRoleOnProject GetUserRoleOnProject(int userId, int projectId)
@@ -134,11 +140,6 @@ namespace DataAccessLayer.PostgreSQL.Repositories
         public IEnumerable<UserRole> GetAllUserRoles()
         {
             return _context.UserRoles.AsQueryable();
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
         }
     }
 }

@@ -26,20 +26,20 @@ namespace PresentationLayer.Blazor.Models
 
         protected IEnumerable<UserOnProjectViewModel> UsersInfo { get; set; } = null!;
 
-        protected UserRoleName[] RolesCapableAssign = null!;
+        protected UserRoleName[] RolesCapableAssign 
+            = new UserRoleName[] { UserRoleName.Creator, UserRoleName.Moderator };
 
         protected UserRoleOnProject RoleOnProject { get; set; } = null!;
 
         protected async override Task OnInitializedAsync()
         {
-            RolesCapableAssign = new UserRoleName[] { UserRoleName.Creator, UserRoleName.Moderator };
-            RoleOnProject = await GetRoleOnProjectAsync();
-            UsersInfo = await TryGetUsersInfoAsync();
-            base.OnInitialized();
+            await UpdateUsersInfoAsync();
+            await base.OnInitializedAsync();
         }
 
         protected async Task UpdateUsersInfoAsync()
         {
+            RoleOnProject = await GetRoleOnProjectAsync();
             UsersInfo = await TryGetUsersInfoAsync();
         }
 
@@ -50,7 +50,7 @@ namespace PresentationLayer.Blazor.Models
                 AuthenticationState state = await AuthenticationState.GetAuthenticationStateAsync();
                 string userIdString = state?.User?.FindFirst("Id")?.Value ?? string.Empty;
                 int.TryParse(userIdString, out int userId);
-                if (userId > 0)
+                if (userId > 0 && Project is not null)
                 {
                     return ProjectService.GetUserRoleOnProject(userId, Project.Id);
                 }
@@ -71,7 +71,7 @@ namespace PresentationLayer.Blazor.Models
 
             try
             {
-                var users = ProjectService.GetProjectUsers(Project.Id).ToList();
+                var users = ProjectService.GetProjectUsers(Project.Id).ToArray();
                 usersInfo = new List<UserOnProjectViewModel>();
 
                 foreach (var user in users)

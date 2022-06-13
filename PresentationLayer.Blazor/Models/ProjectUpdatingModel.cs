@@ -15,7 +15,7 @@ namespace PresentationLayer.Blazor.Models
         public Project Project { get; set; } = null!;
 
         private const string EnabledUpdateButtonText = "Update";
-        private const string DisabledCreateButtonText = "Creating...";
+        private const string DisabledCreateButtonText = "Updating...";
 
         protected bool IsUpdateButtonDisabled = false;
 

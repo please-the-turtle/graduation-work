@@ -52,7 +52,6 @@ namespace BuisnessLogicLayer.Projects
             get
             {
                 UserRoleOnProject emptyRole = new();
-                emptyRole.Role = UserRoleName.User;
                 return emptyRole;
             }
         }

@@ -19,7 +19,7 @@ namespace PresentationLayer.Blazor.Models
         protected IDialogService DialogService { get; set; } = null!;
 
         [Parameter]
-        //[EditorRequired]
+        [EditorRequired]
         public Project Project { get; set; } = null!;
 
         [Parameter]
@@ -34,15 +34,26 @@ namespace PresentationLayer.Blazor.Models
             = new[] { UserRoleName.Creator, UserRoleName.Moderator };
 
         protected int UserId;
-        protected UserRoleOnProject CurrentUserRole = null!;
-        protected IEnumerable<User> ProjectUsers = null!;
+        protected UserRoleOnProject CurrentUserRole { get; set; } = null!;
+        protected IEnumerable<User> ProjectUsers { get; set; } = null!;
 
-        protected override async Task OnInitializedAsync()
+        protected async override Task OnParametersSetAsync()
         {
-            AuthenticationState state = await AuthenticationState.GetAuthenticationStateAsync();
-            string userIdString = state?.User?.FindFirst("Id")?.Value ?? string.Empty;
+            if (UserId < 1)
+            {
+                try
+                {
+                    AuthenticationState state = await AuthenticationState.GetAuthenticationStateAsync();
+                    string userIdString = state?.User?.FindFirst("Id")?.Value ?? string.Empty;
+                    int.TryParse(userIdString, out UserId);
+                }
+                catch (InvalidOperationException)
+                {
+                    await ShowErrorMessageAsync();
+                }
+            }
 
-            int.TryParse(userIdString, out UserId);
+            await base.OnParametersSetAsync();
             CurrentUserRole = TryGetUserRoleOnProject();
             ProjectUsers = TryGetProjectUsers();
         }
@@ -85,11 +96,16 @@ namespace PresentationLayer.Blazor.Models
                 }
                 catch (InvalidOperationException)
                 {
-                    string messageBoxTitle = "Something wrong...";
-                    string messageBoxText = "Try to update page.";
-                    await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
+                    await ShowErrorMessageAsync();
                 }
             }
+        }
+
+        private async Task ShowErrorMessageAsync()
+        {
+            string messageBoxTitle = "Something wrong...";
+            string messageBoxText = "Try to update page.";
+            await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
         }
 
         protected async Task OnUpdateClickAsync()

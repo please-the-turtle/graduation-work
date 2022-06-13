@@ -13,20 +13,20 @@
             </MudCardContent>
             <MudCardActions>
                 <div class="project-card-actions">
-                    <div>
-                        <LimitedAccessView RolesWithAccess="RolesCapableDelete">
-                            <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Error"
-                                       OnClick="OnDeleteClickAsync">
-                                Delete
-                            </MudButton>
-                        </LimitedAccessView>
-                        <LimitedAccessView RolesWithAccess="RolesCapableUpdate">
+                    <LimitedAccessView RolesWithAccess="RolesCapableUpdate">
+                        <div>
+                            <LimitedAccessView RolesWithAccess="RolesCapableDelete">
+                                <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Error"
+                                           OnClick="OnDeleteClickAsync">
+                                    Delete
+                                </MudButton>
+                            </LimitedAccessView>
                             <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary"
                                        OnClick="OnUpdateClickAsync">
                                 Update
                             </MudButton>
-                        </LimitedAccessView>
-                    </div>
+                        </div>
+                    </LimitedAccessView>
                     <div>
                         <MudButton OnClick="OnUsersClick">
                             <MudAvatarGroup Max="3" MaxColor="Color.Primary" MaxSize="Size.Medium" Spacing="4">

@@ -30,6 +30,7 @@ namespace DataAccessLayer.PostgreSQL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +43,8 @@ namespace DataAccessLayer.PostgreSQL
             modelBuilder.ApplyConfiguration(new UserAssignedToTaskConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleOnProjectConfiguration());
+            
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

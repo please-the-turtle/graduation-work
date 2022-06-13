@@ -34,23 +34,19 @@ namespace PresentationLayer.Blazor.Models
 
         protected UserRoleName SelectedRole
         {
-            get => _selectedRole;
+            get => Item.UserRoleData.Role;
             set
             {
-                _selectedRole = value;
                 Item.UserRoleData.Role = value;
                 Task.Run(ChangeUserRoleAsync);
             }
         }
 
-        private UserRoleName _selectedRole;
-
-        protected override void OnInitialized()
+        protected override void OnParametersSet()
         {
-            _selectedRole = Item.UserRoleData.Role;
             IsCapableUpdate = GetUpdatingCapability();
             IsCapableDelete = GetDeletingCapability();
-            base.OnInitialized();
+            base.OnParametersSet();
         }
 
         protected async Task ChangeUserRoleAsync()
@@ -67,11 +63,11 @@ namespace PresentationLayer.Blazor.Models
                 string message = "Failed to change user role. Try later.";
                 await DialogService.ShowMessageBox(title, message);
             }
-
+            
             IsCapableUpdate = GetUpdatingCapability();
         }
 
-        protected void RemoveUserFromProject()
+        protected async Task RemoveUserFromProjectAsync()
         {
             IsCapableDelete = false;
 
@@ -83,16 +79,16 @@ namespace PresentationLayer.Blazor.Models
             {
                 string title = "Something wrong...";
                 string message = "Failed to change user role. Try later.";
-                DialogService.ShowMessageBox(title, message);
+                await DialogService.ShowMessageBox(title, message);
             }
 
-            OnUserRemovedFromProject.InvokeAsync();
+            await OnUserRemovedFromProject.InvokeAsync();
         }
 
         private bool GetUpdatingCapability()
         {
             bool isCapableUpdate = RolesCapableUpdate.Contains<UserRoleName>(RoleOnProject.Role) &&
-                Item.UserRoleData.Role != UserRoleName.Creator;
+                SelectedRole != UserRoleName.Creator;
 
             return isCapableUpdate;
         }
@@ -100,7 +96,7 @@ namespace PresentationLayer.Blazor.Models
         private bool GetDeletingCapability()
         {
             bool isCapableDelete = RolesCapableDelete.Contains<UserRoleName>(RoleOnProject.Role) &&
-                Item.UserRoleData.Role != UserRoleName.Creator;
+                SelectedRole != UserRoleName.Creator;
 
             return isCapableDelete;
         }

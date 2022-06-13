@@ -23,6 +23,7 @@ namespace PresentationLayer.Blazor.Models
         protected async override Task OnInitializedAsync()
         {
             await RefreshProjectsListAsync();
+            await base.OnInitializedAsync();
         }
 
         protected async Task RefreshProjectsListAsync()
