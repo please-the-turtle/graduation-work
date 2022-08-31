@@ -1,0 +1,128 @@
+﻿@page "/project/{ProjectId:int}"
+
+@using BuisnessLogicLayer.Projects
+@using BuisnessLogicLayer.Tasks
+@using PresentationLayer.Blazor.Pages.Tasks
+
+@inject NavigationManager NavigationManager
+@inject ProjectService ProjectService
+@inject IDialogService DialogService
+
+<div class="project-page-container">
+    <MudText Typo="Typo.h3" Align="Align.Center">@(Project?.Name ?? "Project not found") </MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center">@Project?.Description</MudText>
+
+
+    <div class="top-buttons">
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
+            <MudButton StartIcon="@Icons.Filled.Refresh">
+                Refresh
+            </MudButton>
+            <MudButton StartIcon="@Icons.Filled.Add" OnClick="AddProjectTaskAsync">
+                Create task
+            </MudButton>
+        </MudButtonGroup>
+    </div>
+
+    <MudExpansionPanels Elevation="5">
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex  object-fill align-center">
+                    <MudStack Spacing="0" Style="width:100%">
+                    <MudText Typo="Typo.h6" Align="Align.Left" >Спроектировать базу данных</MudText>
+                    <MudText Typo="Typo.caption" Align="Align.Left">Спроектировать базу данных для системы учета работ сотрудниками предприятия.</MudText>
+                    </MudStack>
+                    <MudSelect T="string" Value="@(new string("InProgress"))" HelperText="Status" Dense="true"
+                        Style="width: 150px" Margin="Margin.Dense" Class="object-right ">
+                            <MudSelectItem Value="@(new string("InProgress"))">Low</MudSelectItem>
+                            <MudSelectItem Value="@(new string("InProgress"))">Medium</MudSelectItem>
+                            <MudSelectItem Value="@(new string("InProgress"))">Completed</MudSelectItem>
+
+                        
+                    </MudSelect>
+                </div>
+            </TitleContent>
+            <ChildContent>
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex  object-fill align-center">
+                    <MudStack Spacing="0" Style="width:100%">
+                    <MudText Typo="Typo.h6" Align="Align.Left" >Создать страницу проектов</MudText>
+                    <MudText Typo="Typo.caption" Align="Align.Left">Реализовать страницу для вывода списка проектов.</MudText>
+                    </MudStack>
+                    <MudButton StartIcon="@Icons.Filled.AccessTime" Class="mr-4" Variant="Variant.Filled" DisableElevation="true">
+                        Log Time
+                    </MudButton>
+                    <MudSelect T="string" Value="@(new string("InProgress"))" HelperText="Status" Dense="true"
+                        Style="width: 150px" Margin="Margin.Dense" Class="object-right ">
+                            <MudSelectItem Value="@(new string("InProgress"))">Low</MudSelectItem>
+                            <MudSelectItem Value="@(new string("InProgress"))">Medium</MudSelectItem>
+                            <MudSelectItem Value="@(new string("InProgress"))">InProgress</MudSelectItem>
+                    </MudSelect>
+                </div>
+            </TitleContent>
+            <ChildContent>
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex  object-fill align-center">
+                    <MudStack Spacing="0" Style="width:100%">
+                    <MudText Typo="Typo.h6" Align="Align.Left">Доступ к БД</MudText>
+                    <MudText Typo="Typo.caption" Align="Align.Left">Реализовать компоненты системы для доступа к базе данных из веб-приложения.</MudText>
+                    </MudStack>
+                    <MudSelect T="string" Value="@(new string("InProgress"))" HelperText="Status" Dense="true"
+                        Style="width: 150px" Margin="Margin.Dense" Class="object-right ">
+                            <MudSelectItem Value="@(new string("InProgress"))">Low</MudSelectItem>
+                            <MudSelectItem Value="@(new string("InProgress"))">Medium</MudSelectItem>
+                            <MudSelectItem Value="@(new string("InProgress"))">NotAtWork</MudSelectItem>
+
+                        
+                    </MudSelect>
+                </div>
+            </TitleContent>
+            <ChildContent>
+            </ChildContent>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+
+</div>
+
+@code {
+    [Parameter]
+    public int ProjectId { get; set; }
+
+    private Project Project { get; set; } = null!;
+
+    private IEnumerable<ProjectTask> ProjectTasks { get; set; } = null!;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            Project = ProjectService.GetById(ProjectId);
+        }
+        catch
+        {
+            string title = "Something wrong...";
+            string text = "Failed to get project info.";
+            await DialogService.ShowMessageBox(title, text);
+        }
+
+        await base.OnParametersSetAsync();
+    }
+
+    protected async Task AddProjectTaskAsync()
+    {
+        var dialog = DialogService.Show<TaskCreating_Dialog>();
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+
+        }
+    }
+
+}

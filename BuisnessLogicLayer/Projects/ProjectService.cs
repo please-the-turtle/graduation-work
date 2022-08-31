@@ -16,6 +16,16 @@ namespace BuisnessLogicLayer.Projects
             return _repository.IsProjectExists(projectId);
         }
 
+        public Project GetById(int projectId)
+        {
+            if (projectId < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(projectId), "Project id must be greater than zero.");
+            }
+
+            return _repository.GetById(projectId);
+        }
+
         /// <summary>
         /// Creates a new project and assigns a creator to it.
         /// </summary>

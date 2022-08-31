@@ -2,7 +2,7 @@
 
 namespace BuisnessLogicLayer.Users
 {
-    public class UserService : IDisposable
+    public class UserService
     {
         private readonly IUserRepository _repository;
 
@@ -146,11 +146,6 @@ namespace BuisnessLogicLayer.Users
             }
 
             return Cryptography.Verify(password, user.PasswordHash);
-        }
-
-        public void Dispose()
-        {
-            _repository.Dispose();
         }
     }
 }

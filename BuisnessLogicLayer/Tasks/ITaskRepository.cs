@@ -1,25 +1,27 @@
-﻿namespace BuisnessLogicLayer.Tasks
+﻿using BuisnessLogicLayer.Users;
+
+namespace BuisnessLogicLayer.Tasks
 {
     public interface ITaskRepository
     {
-        void Create(NewTask newTask);
+        void Add(NewProjectTask newTask);
 
-        void Delete(Task task);
+        void Delete(ProjectTask task);
 
-        void Update(Task task);
+        void Update(ProjectTask task);
 
-        bool IsTaskExists(Task task);
+        ProjectTask GetById(int taskId);
 
-        bool IsTaskHasChildren(Task task);
+        void AssignUserToTask(UserAssignedToTask newAssignment);
 
-        IQueryable<Task> GetTaskChildren(Task task);
+        void RemoveUserFromTask(UserAssignedToTask assignmentInfo);
 
-        IQueryable<Task> GetProjectTasks(int projectId);
+        IEnumerable<ProjectTask> GetTaskChildren(int taskId);
 
-        IQueryable<Task> GetUserTasks(int userId);
+        IEnumerable<ProjectTask> GetProjectTasks(int projectId);
 
-        IQueryable<Task> GetUsersAssignedToTask(int taskId);
+        IEnumerable<ProjectTask> GetUserTasks(int userId);
 
-        void ChangeTaskStatus(int taskId, TaskStatus status);
+        IEnumerable<User> GetUsersAssignedToTask(int taskId);
     }
 }

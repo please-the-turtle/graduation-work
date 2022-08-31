@@ -1,6 +1,6 @@
 ﻿namespace BuisnessLogicLayer.Users
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository
     {
         void Add(User user);
 

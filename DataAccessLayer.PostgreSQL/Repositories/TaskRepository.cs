@@ -1,8 +1,9 @@
 ﻿using BuisnessLogicLayer.Tasks;
+using BuisnessLogicLayer.Users;
 
 namespace DataAccessLayer.PostgreSQL.Repositories
 {
-    internal class TaskRepository : ITaskRepository
+    internal class TaskRepository : ITaskRepository, IDisposable
     {
         private readonly ApplicationDbContext _context;
 
@@ -11,54 +12,105 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(NewTask newTask)
+        public void Add(NewProjectTask newProjectTask)
         {
-            throw new NotImplementedException();
+            if (newProjectTask is null)
+            {
+                throw new ArgumentNullException(nameof(newProjectTask));
+            }
+
+            ProjectTask task = new()
+            {
+                Name = newProjectTask.Name,
+                LeadTime = newProjectTask.LeadTime
+            };
+
+            _context.SaveChanges();
         }
 
-        public void Delete(Task task)
+        public void Update(ProjectTask task)
         {
-            throw new NotImplementedException();
+            if (task is null)
+            {
+                throw new ArgumentNullException(nameof(task));
+            }
+
+            _context.Tasks.Update(task);
+
+            _context.SaveChanges();
         }
 
-        public Task Get(Task task)
+        public void Delete(ProjectTask task)
         {
-            throw new NotImplementedException();
+            if (task is null)
+            {
+                throw new ArgumentNullException(nameof(task));
+            }
+
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
         }
 
-        public void AssignUserToTask(int userId, int taskId)
+        public ProjectTask GetById(int taskId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.FirstOrDefault(p => p.Id == taskId)!;
         }
 
-        public void RemoveUserFromTask(int userId, int taskId)
+        public void AssignUserToTask(UserAssignedToTask newAssignment)
         {
-            throw new NotImplementedException();
+            if (newAssignment is null)
+            {
+                throw new ArgumentNullException(nameof(newAssignment));
+            }
+
+            _context.UserAssignedToTasks.Add(newAssignment);
+
+            _context.SaveChanges();
+        }   
+
+        public void RemoveUserFromTask(UserAssignedToTask assignmentInfo)
+        {
+            if (assignmentInfo is null)
+            {
+                throw new ArgumentNullException(nameof(assignmentInfo));
+            }
+
+            _context.UserAssignedToTasks.Remove(assignmentInfo);
+
+            _context.SaveChanges();
         }
 
-        public IQueryable<Task> GetProjectTasks(int projectId)
+        public IEnumerable<ProjectTask> GetProjectTasks(int projectId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.Where(p => p.ProjectId == projectId);
         }
 
-        public IQueryable<Task> GetTaskChildren(Task task)
+        public IEnumerable<ProjectTask> GetTaskChildren(int taskId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.Where(p => p.Parent == taskId);
         }
 
-        public IQueryable<Task> GetUsersAssignedToTask(int taskId)
+        public IEnumerable<User> GetUsersAssignedToTask(int taskId)
         {
-            throw new NotImplementedException();
+            return _context.Users.Where(
+                u => _context.UserAssignedToTasks
+                .Where(x => x.TaskId == taskId)
+                .Select(t => t.UserId)
+                .Contains(u.Id));
         }
 
-        public IQueryable<Task> GetUserTasks(int userId)
+        public IEnumerable<ProjectTask> GetUserTasks(int userId)
         {
-            throw new NotImplementedException();
+            return _context.Tasks.Where(
+                u => _context.UserAssignedToTasks
+                .Where(x => x.UserId == userId)
+                .Select(t => t.TaskId)
+                .Contains(u.Id));
         }
 
-        public void Update(Task task)
+        public void Dispose()
         {
-            throw new NotImplementedException();
+            _context?.Dispose();
         }
     }
 }

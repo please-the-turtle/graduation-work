@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.ProjectConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configurations\ProjectConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.TaskConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configurations\TaskConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.TaskPriorityConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Configurations\TaskPriorityConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.TaskStatusConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Configurations\TaskStatusConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.UserAssignedToTaskConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configurations\UserAssignedToTaskConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.UserConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configurations\UserConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.UserRoleConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Configurations\UserRoleConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Configurations.UserRoleOnProjectConfiguration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configurations\UserRoleOnProjectConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Repositories.ProjectRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAgAAAACAABAAAAAAABAAAAAMAAAAAAAIBAAAAAqg=</HashCode>
+      <FileName>Repositories\ProjectRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Repositories.TaskRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAcAAAAAAGAABAAAAAAAAAAAAAEAAAQgAAAAAIAAAIA=</HashCode>
+      <FileName>Repositories\TaskRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.Repositories.UserRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAACAABAAAAACAAAAAAAGAAAAAAAEAAAIAAIA=</HashCode>
+      <FileName>Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DataAccessLayer.PostgreSQL.ApplicationDbContext">
+    <Position X="3.25" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAQAAAAAAAAAAABAAEAAAAAgAAACIBAAIAQA=</HashCode>
+      <FileName>ApplicationDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

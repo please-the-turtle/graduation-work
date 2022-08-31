@@ -16,7 +16,7 @@ namespace DataAccessLayer.PostgreSQL
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
+            
         }
 
         public virtual DbSet<Project> Projects { get; set; } = null!;

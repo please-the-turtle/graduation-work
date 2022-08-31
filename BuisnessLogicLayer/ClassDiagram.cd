@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BuisnessLogicLayer.Users.NewUser" Collapsed="true">
+    <Position X="8.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAQIAAAAAE=</HashCode>
+      <FileName>Users\NewUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Users.User" Collapsed="true">
+    <Position X="12" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAEAAACAQAAAoAAAAABAACAAQgAAAAACQIAAAAAE=</HashCode>
+      <FileName>Users\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Users.UserRole" Collapsed="true">
+    <Position X="10.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Users\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Users.UserService" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQABAAAABAAAAAEACAAAIAAAEAAAAAAAEAAAIAAIA=</HashCode>
+      <FileName>Users\UserService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Tasks.NewProjectTask" Collapsed="true">
+    <Position X="6.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Tasks\NewTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Tasks.ProjectTask" Collapsed="true">
+    <Position X="6.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAEAAAgAAAEAAgASJQABAAABAAAAAEAAAAAIAA=</HashCode>
+      <FileName>Tasks\ProjectTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Tasks.TaskPriority" Collapsed="true">
+    <Position X="6.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Tasks\TaskPriority.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Tasks.TaskService">
+    <Position X="10.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAcAAAAAAEBAAAAAAAAAAAAAAAEAAAQgAAAAAIAAAIA=</HashCode>
+      <FileName>Tasks\TaskService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Tasks.TaskStatus" Collapsed="true">
+    <Position X="6.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Tasks\TaskStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Tasks.UserAssignedToTask" Collapsed="true">
+    <Position X="8.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgAAAgAIAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Tasks\UserAssignedToTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Projects.NewProject" Collapsed="true">
+    <Position X="8.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Projects\NewProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Projects.Project" Collapsed="true">
+    <Position X="12" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAQAAAAAAAAAAACIAAAAAAA=</HashCode>
+      <FileName>Projects\Project.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Projects.ProjectService">
+    <Position X="12" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAABAAAAAAIAABAAAAAMAAEAACAIAAAAAAqg=</HashCode>
+      <FileName>Projects\ProjectService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuisnessLogicLayer.Projects.UserRoleOnProject" Collapsed="true">
+    <Position X="10.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABIAAAAAAAAAAAEAIACAgABAAAAAAIAAAAAAAAgAA=</HashCode>
+      <FileName>Projects\UserRoleOnProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BuisnessLogicLayer.Users.IUserRepository">
+    <Position X="15.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAACAAAAAAAGAAAAAAAEAAAIAAIA=</HashCode>
+      <FileName>Users\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BuisnessLogicLayer.Tasks.ITaskRepository">
+    <Position X="15.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAcAAAAAAEAAAAAAAAAAAAAAAAEAAAQgAAAAAIAAAIA=</HashCode>
+      <FileName>Tasks\ITaskRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BuisnessLogicLayer.Projects.IProjectRepository">
+    <Position X="13.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAgAAAAAAAAAAAAAAABAAAAAMAAAAAAAIBAAAAAqg=</HashCode>
+      <FileName>Projects\IProjectRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="BuisnessLogicLayer.Users.UserRoleName" Collapsed="true">
+    <Position X="6.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAEAAAA=</HashCode>
+      <FileName>Users\UserRoleName.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BuisnessLogicLayer.Tasks.TaskPriorityName" Collapsed="true">
+    <Position X="6.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAACAgAAAAAAAAAAAEEAAA=</HashCode>
+      <FileName>Tasks\TaskPriorityName.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BuisnessLogicLayer.Tasks.TaskStatusName" Collapsed="true">
+    <Position X="6.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAYAAAAgAAIAAAAAAAAAAAAAAAAAAAAAABEAAAA=</HashCode>
+      <FileName>Tasks\TaskStatusName.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

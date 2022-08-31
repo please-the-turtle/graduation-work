@@ -1,0 +1,25 @@
+﻿@inherits TaskCreatingModel
+
+<EditForm Model="NewTaskData" OnValidSubmit="OnCreateClickedAsync">
+    <MudDialog>
+        <DialogContent>
+            <DataAnnotationsValidator />
+            <MudStack Justify="Justify.Center" AlignItems="AlignItems.Stretch">
+                <MudTextField Label="Name" HelperText="Max. 100 characters"
+                              @bind-Value="NewTaskData.Name" For="@(() => NewTaskData.Name)" />
+                <MudTextField Mask="LeadTimeMask"
+                              Label="Lead time" HelperText="Example: 0 days 15 hours 00 minutes."
+                              @bind-Value="NewTaskData.LeadTime" For="() => NewTaskData.LeadTime"/>
+            </MudStack>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">
+                Cancel
+            </MudButton>
+            <MudButton Color="Color.Primary" Variant="Variant.Filled"
+                       ButtonType="ButtonType.Submit" Disabled="IsCreateButtonDisabled">
+                Create
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+</EditForm>

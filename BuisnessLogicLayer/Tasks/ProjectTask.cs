@@ -11,8 +11,9 @@ namespace BuisnessLogicLayer.Tasks
         }
 
         public int Id { get; set; }
-        public TaskStatusName Status { get; set; }
-        public TaskPriorityName Priority { get; set; }
+        public string? Name { get; set; }
+        public TaskStatusName Status { get; set; } = TaskStatusName.NotAtWork;
+        public TaskPriorityName Priority { get; set; } = TaskPriorityName.Medium;
         public int ProjectId { get; set; }
         public int? Parent { get; set; }
         public string? Description { get; set; }

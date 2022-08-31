@@ -13,6 +13,7 @@ namespace PresentationLayer.Blazor.Models
             Description = description;
         }
 
+        [Required]
         [StringLength(MaxNameLength, ErrorMessage = $"Name length can't be more than 100.")]
         public string Name { get; set; } = null!;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -86,6 +87,7 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     status = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     priority = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
                     project_id = table.Column<int>(type: "integer", nullable: false),
@@ -205,7 +207,7 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                 values: new object[,]
                 {
                     { "Creator", "Creator of the project." },
-                    { "Moderator", "Moderastor of the project." },
+                    { "Moderator", "Moderator of the project." },
                     { "User", "Ordinary user." }
                 });
 

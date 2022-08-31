@@ -14,6 +14,10 @@ namespace DataAccessLayer.PostgreSQL.Configurations
                 .HasColumnName("id")
                 .UseIdentityAlwaysColumn();
 
+            builder.Property(e => e.Name)
+                .HasColumnName("name")
+                .HasMaxLength(50);
+
             builder.Property(e => e.Deadline)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("deadline");

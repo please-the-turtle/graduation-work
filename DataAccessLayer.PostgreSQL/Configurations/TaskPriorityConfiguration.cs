@@ -27,7 +27,6 @@ namespace DataAccessLayer.PostgreSQL.Configurations
             FillTable(builder);
         }
 
-        // TODO Hardcoding
         private void FillTable(EntityTypeBuilder<TaskPriority> builder)
         {
             builder.HasData(new TaskPriority { Name = TaskPriorityName.Low, Description = "Task has low priority." });

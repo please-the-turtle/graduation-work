@@ -1,0 +1,11 @@
+﻿.top-buttons {
+    display: flex;
+    flex-flow: row;
+    margin: 7px 7px 10px 7px;
+    justify-content: center;
+    align-content: center;
+}
+
+.project-page-container{
+    margin: 9px 9px 20px 9px;
+}

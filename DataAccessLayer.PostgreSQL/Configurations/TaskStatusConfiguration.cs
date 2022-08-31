@@ -29,7 +29,6 @@ namespace DataAccessLayer.PostgreSQL.Configurations
             FillTable(builder);
         }
 
-        // TODO Hardcoding
         private void FillTable(EntityTypeBuilder<TaskStatus> builder)
         {
             builder.HasData(new TaskStatus { Name = TaskStatusName.NotAtWork, Description = "No one is currently working on the task." });

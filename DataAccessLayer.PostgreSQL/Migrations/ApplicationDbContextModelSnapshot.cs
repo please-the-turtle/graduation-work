@@ -17,12 +17,12 @@ namespace DataAccessLayer.PostgreSQL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BuisnessLogicLayer.Project", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Projects.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,33 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                     b.ToTable("projects", (string)null);
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.Task", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Projects.UserRoleOnProject", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("integer")
+                        .HasColumnName("project_id");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("role");
+
+                    b.HasKey("UserId", "ProjectId")
+                        .HasName("user_role_on_project_pkey");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("Role");
+
+                    b.ToTable("user_role_on_project", (string)null);
+                });
+
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.ProjectTask", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,6 +93,12 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                     b.Property<TimeSpan>("LeadTime")
                         .HasColumnType("interval")
                         .HasColumnName("lead_time");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("name");
 
                     b.Property<int?>("Parent")
                         .HasColumnType("integer")
@@ -101,7 +133,7 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                     b.ToTable("tasks", (string)null);
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.TaskPriority", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.TaskPriority", b =>
                 {
                     b.Property<string>("Name")
                         .HasMaxLength(25)
@@ -141,7 +173,7 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.TaskStatus", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.TaskStatus", b =>
                 {
                     b.Property<string>("Name")
                         .HasMaxLength(25)
@@ -186,7 +218,29 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.User", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.UserAssignedToTask", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("integer")
+                        .HasColumnName("task_id");
+
+                    b.Property<TimeSpan?>("SpentTime")
+                        .HasColumnType("interval")
+                        .HasColumnName("spent_time");
+
+                    b.HasKey("UserId", "TaskId")
+                        .HasName("user_assigned_to_task_pkey");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("user_assigned_to_task", (string)null);
+                });
+
+            modelBuilder.Entity("BuisnessLogicLayer.Users.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -250,29 +304,7 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.UserAssignedToTask", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
-                        .HasColumnName("user_id");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("integer")
-                        .HasColumnName("task_id");
-
-                    b.Property<TimeSpan?>("SpentTime")
-                        .HasColumnType("interval")
-                        .HasColumnName("spent_time");
-
-                    b.HasKey("UserId", "TaskId")
-                        .HasName("user_assigned_to_task_pkey");
-
-                    b.HasIndex("TaskId");
-
-                    b.ToTable("user_assigned_to_task", (string)null);
-                });
-
-            modelBuilder.Entity("BuisnessLogicLayer.UserRole", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Users.UserRole", b =>
                 {
                     b.Property<string>("Name")
                         .HasMaxLength(25)
@@ -298,7 +330,7 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                         new
                         {
                             Name = "Moderator",
-                            Description = "Moderastor of the project."
+                            Description = "Moderator of the project."
                         },
                         new
                         {
@@ -307,54 +339,57 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.UserRoleOnProject", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Projects.UserRoleOnProject", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
-                        .HasColumnName("user_id");
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer")
-                        .HasColumnName("project_id");
-
-                    b.Property<string>("Role")
+                    b.HasOne("BuisnessLogicLayer.Projects.Project", "Project")
+                        .WithMany("UserRoleOnProjects")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("character varying(25)")
-                        .HasColumnName("role");
+                        .HasConstraintName("user_role_on_project_project_id_fkey");
 
-                    b.HasKey("UserId", "ProjectId")
-                        .HasName("user_role_on_project_pkey");
+                    b.HasOne("BuisnessLogicLayer.Users.UserRole", "RoleNavigation")
+                        .WithMany("UserRoleOnProjects")
+                        .HasForeignKey("Role")
+                        .IsRequired()
+                        .HasConstraintName("user_role_on_project_role_fkey");
 
-                    b.HasIndex("ProjectId");
+                    b.HasOne("BuisnessLogicLayer.Users.User", "User")
+                        .WithMany("UserRoleOnProjects")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("user_role_on_project_user_id_fkey");
 
-                    b.HasIndex("Role");
+                    b.Navigation("Project");
 
-                    b.ToTable("user_role_on_project", (string)null);
+                    b.Navigation("RoleNavigation");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.Task", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.ProjectTask", b =>
                 {
-                    b.HasOne("BuisnessLogicLayer.Task", "ParentNavigation")
+                    b.HasOne("BuisnessLogicLayer.Tasks.ProjectTask", "ParentNavigation")
                         .WithMany("InverseParentNavigation")
                         .HasForeignKey("Parent")
                         .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("tasks_parent_fkey");
 
-                    b.HasOne("BuisnessLogicLayer.TaskPriority", "PriorityNavigation")
+                    b.HasOne("BuisnessLogicLayer.Tasks.TaskPriority", "PriorityNavigation")
                         .WithMany("Tasks")
                         .HasForeignKey("Priority")
                         .IsRequired()
                         .HasConstraintName("tasks_priority_fkey");
 
-                    b.HasOne("BuisnessLogicLayer.Project", "Project")
+                    b.HasOne("BuisnessLogicLayer.Projects.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("tasks_project_id_fkey");
 
-                    b.HasOne("BuisnessLogicLayer.TaskStatus", "StatusNavigation")
+                    b.HasOne("BuisnessLogicLayer.Tasks.TaskStatus", "StatusNavigation")
                         .WithMany("Tasks")
                         .HasForeignKey("Status")
                         .IsRequired()
@@ -369,16 +404,16 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                     b.Navigation("StatusNavigation");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.UserAssignedToTask", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.UserAssignedToTask", b =>
                 {
-                    b.HasOne("BuisnessLogicLayer.Task", "Task")
+                    b.HasOne("BuisnessLogicLayer.Tasks.ProjectTask", "Task")
                         .WithMany("UserAssignedToTasks")
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("user_assigned_to_task_task_id_fkey");
 
-                    b.HasOne("BuisnessLogicLayer.User", "User")
+                    b.HasOne("BuisnessLogicLayer.Users.User", "User")
                         .WithMany("UserAssignedToTasks")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -390,67 +425,38 @@ namespace DataAccessLayer.PostgreSQL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.UserRoleOnProject", b =>
-                {
-                    b.HasOne("BuisnessLogicLayer.Project", "Project")
-                        .WithMany("UserRoleOnProjects")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("user_role_on_project_project_id_fkey");
-
-                    b.HasOne("BuisnessLogicLayer.UserRole", "RoleNavigation")
-                        .WithMany("UserRoleOnProjects")
-                        .HasForeignKey("Role")
-                        .IsRequired()
-                        .HasConstraintName("user_role_on_project_role_fkey");
-
-                    b.HasOne("BuisnessLogicLayer.User", "User")
-                        .WithMany("UserRoleOnProjects")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("user_role_on_project_user_id_fkey");
-
-                    b.Navigation("Project");
-
-                    b.Navigation("RoleNavigation");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BuisnessLogicLayer.Project", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Projects.Project", b =>
                 {
                     b.Navigation("Tasks");
 
                     b.Navigation("UserRoleOnProjects");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.Task", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.ProjectTask", b =>
                 {
                     b.Navigation("InverseParentNavigation");
 
                     b.Navigation("UserAssignedToTasks");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.TaskPriority", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.TaskPriority", b =>
                 {
                     b.Navigation("Tasks");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.TaskStatus", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Tasks.TaskStatus", b =>
                 {
                     b.Navigation("Tasks");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.User", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Users.User", b =>
                 {
                     b.Navigation("UserAssignedToTasks");
 
                     b.Navigation("UserRoleOnProjects");
                 });
 
-            modelBuilder.Entity("BuisnessLogicLayer.UserRole", b =>
+            modelBuilder.Entity("BuisnessLogicLayer.Users.UserRole", b =>
                 {
                     b.Navigation("UserRoleOnProjects");
                 });

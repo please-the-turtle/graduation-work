@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using BuisnessLogicLayer.Users;
 using PresentationLayer.Blazor.Pages.Projects;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace PresentationLayer.Blazor.Models
 {
@@ -17,6 +18,9 @@ namespace PresentationLayer.Blazor.Models
 
         [Inject]
         protected IDialogService DialogService { get; set; } = null!;
+
+        [Inject]
+        protected NavigationManager NavigationManager { get; set; } = null!;    
 
         [Parameter]
         [EditorRequired]
@@ -101,12 +105,6 @@ namespace PresentationLayer.Blazor.Models
             }
         }
 
-        private async Task ShowErrorMessageAsync()
-        {
-            string messageBoxTitle = "Something wrong...";
-            string messageBoxText = "Try to update page.";
-            await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
-        }
 
         protected async Task OnUpdateClickAsync()
         {
@@ -136,6 +134,19 @@ namespace PresentationLayer.Blazor.Models
             }
 
             return char.ToUpper(str[0]);
+        }
+
+        protected void NavigateToProjectPage()
+        {
+            string projectPageUri = $"/project/{Project.Id}";
+            NavigationManager.NavigateTo(projectPageUri);
+        }
+
+        protected async Task ShowErrorMessageAsync()
+        {
+            string messageBoxTitle = "Something wrong...";
+            string messageBoxText = "Try to update page.";
+            await DialogService.ShowMessageBox(messageBoxTitle, messageBoxText);
         }
     }
 }

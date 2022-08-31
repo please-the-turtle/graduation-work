@@ -18,6 +18,8 @@ namespace BuisnessLogicLayer.Projects
 
         bool IsProjectExists(int id);
 
+        Project GetById(int projectId);
+
         /// <summary>
         /// Gets the projects of a specific user.
         /// </summary>

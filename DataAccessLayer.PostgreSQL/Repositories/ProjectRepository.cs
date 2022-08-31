@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.PostgreSQL.Repositories
 {
-    public class ProjectRepository : IProjectRepository
+    public class ProjectRepository : IProjectRepository, IDisposable
     {
         private readonly ApplicationDbContext _context;
 
@@ -67,8 +67,18 @@ namespace DataAccessLayer.PostgreSQL.Repositories
             return _context.Projects.Any(p => p.Id == id);
         }
 
+        public Project GetById(int projectId)
+        {
+            return _context.Projects.FirstOrDefault(p => p.Id == projectId)!;
+        }
+
         public void AssignUserToProject(UserRoleOnProject userRoleOnProject)
         {
+            if (userRoleOnProject is null)
+            {
+                throw new ArgumentNullException(nameof(userRoleOnProject));
+            }
+
             _context.UserRoleOnProjects.Add(userRoleOnProject);
 
             _context.SaveChanges();
@@ -76,6 +86,11 @@ namespace DataAccessLayer.PostgreSQL.Repositories
 
         public void ChangeUserRoleOnProject(UserRoleOnProject userRoleOnProject)
         {
+            if (userRoleOnProject is null)
+            {
+                throw new ArgumentNullException(nameof(userRoleOnProject));
+            }
+
             _context.UserRoleOnProjects.Update(userRoleOnProject);
 
             _context.SaveChanges();
@@ -83,6 +98,11 @@ namespace DataAccessLayer.PostgreSQL.Repositories
 
         public void RemoveUserFromProject(UserRoleOnProject userRoleOnProject)
         {
+            if (userRoleOnProject is null)
+            {
+                throw new ArgumentNullException(nameof(userRoleOnProject));
+            }
+
             _context.UserRoleOnProjects.Remove(userRoleOnProject);
 
             _context.SaveChanges();
@@ -139,7 +159,12 @@ namespace DataAccessLayer.PostgreSQL.Repositories
 
         public IEnumerable<UserRole> GetAllUserRoles()
         {
-            return _context.UserRoles.AsQueryable();
+            return _context.UserRoles.AsEnumerable();
+        }
+
+        public void Dispose()
+        {
+            _context?.Dispose();
         }
     }
 }
